@@ -3,16 +3,21 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abait-ta <abait-ta@student.1337.ma >       +#+  +:+       +#+         #
+#    By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/11 03:18:17 by abait-ta          #+#    #+#              #
-#    Updated: 2023/11/12 20:30:31 by abait-ta         ###   ########.fr        #
+#    Updated: 2023/11/21 13:08:59 by abait-ta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-PARSING = ./PARSING
+PARSING_D = ./PARSING/Displayer
+PARSING_G = ./PARSING/General_tools
+PARS_L    = ./PARSING/getline
+PARS_M    = ./PARSING/MAPARSER
 
-SRC = Global_main.c $(PARSING)/display_errors.c $(PARSING)/General_tools/g_tools.c \
+SRC = Global_main.c $(PARS_M)/import_map.c $(PARSING_D)/display_errors.c $(PARSING_G)/g_tools.c $(PARSING_G)/g_usage.c \
+$(PARSING_G)/g_utils.c $(PARS_L)/get_next_line.c $(PARS_L)/get_next_line_utils.c $(PARS_M)/textures_builder.c \
+$(PARS_M)/epur_line.c
 
 HEADER = ./HEADER/Parsing.h
 
@@ -27,10 +32,10 @@ NAME = cub3d
 all : $(NAME)
 
 $(NAME): $(HEADER) $(OBJ)
-	@$(CC) $(CFLAGS) -o $@ -fsanitize=address -g $(OBJ)
+	@$(CC) $(CFLAGS) -o $@  $(OBJ)
 
 %.o : %.c $(HEADER)
-	@$(CC)  $(CFLAGS) -c -fsanitize=address -g $< -o  $@	
+	@$(CC)  $(CFLAGS) -c  $< -o  $@	
 
 clean :
 	@$(RM) $(OBJ)

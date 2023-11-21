@@ -1,17 +1,5 @@
 #include "../../HEADER/Parsing.h"
 
-int ft_strlen(char *data)
-{
-    int i;
-
-    i = 0;
-    if (!data)
-        return (0);
-    while (data[i])
-        i++;
-    return (i);
-}
-
 int getstart(char *data)
 {
     int start;
@@ -24,10 +12,10 @@ int getstart(char *data)
 
 int getend(char *data)
 {
-    int end;
-
+    size_t end;
     end = ft_strlen(data) - 1;
-    while (end >= 0 && (data[end] == ' ' || data[end] == '\t'))
+    while (end >= 0 && (data[end] == ' ' \
+        || data[end] == '\t' || data[end] == '\n'))
         end--;
     return (end);
 }
@@ -36,7 +24,6 @@ char    *ft_strtrim(char *to_trim)
 {
     t_trim elem;
    
-
     elem.i = 0;
     elem.start_trim = getstart(to_trim);
     elem.end_trim = getend(to_trim);
@@ -51,5 +38,26 @@ char    *ft_strtrim(char *to_trim)
         elem.start_trim++;
     }
     elem.trimmed[elem.i] = '\0';
-    return(elem.trimmed);
+    free(to_trim);
+    return(epur_string(elem.trimmed));
+}
+
+char	*ft_strndup(char *to_dup, int len)
+{
+	int		i;
+	char	*duped;
+
+	if (!to_dup)
+		return (NULL);
+	i = 0;
+	duped = malloc(sizeof(char) * (len + 1));
+	if (!duped)
+		return (NULL);
+	while (to_dup[i] && i < len)
+	{
+		duped[i] = to_dup[i];
+		i++;
+	}
+	duped[i] = '\0';
+	return (duped);
 }

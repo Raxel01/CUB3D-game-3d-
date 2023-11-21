@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abait-ta <abait-ta@student.1337.ma >       +#+  +:+       +#+        */
+/*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 02:55:14 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/18 15:49:02 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/11/21 18:44:00 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,50 @@
 # include <string.h>
 # include <fcntl.h>
 # include <errno.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <stdbool.h>
+
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 9
+#endif
+
+enum					e_path
+{
+    NORD,
+    SOUTH,
+    WEST,
+    EAST,
+};
+
+enum    e_floorciel
+{
+    FLOOR,
+    CIEL,
+};
+
+typedef struct rgb
+{
+    long rgb[3];
+    enum e_floorciel type;
+    size_t member;
+    struct rgb *next;
+}   t_rgb;
+
+typedef struct texture
+{
+    char            *path;
+    enum e_path     type;
+    size_t          size;
+    struct texture  *next;
+}   t_textures;
+
+typedef struct data
+{
+    t_textures *texture;
+    char **map;
+    t_rgb   *color;
+}   t_gamedata;
 
 typedef struct trim
 {
@@ -29,17 +73,76 @@ typedef struct trim
     int     i;
 }   t_trim;
 
+typedef struct variable
+{
+	int					i;
+	int					flg;
+	char				*epured_string;
+	char				*begin;
+}						t_var;
+
+typedef struct split
+{
+    int		i;
+	char	**str;
+	char	*tmp;
+	int		words;
+	int		len;
+}   t_split;
 /*
     @- error phase :
 */
 void    display_error(char *error);
+void    error(char *error);
+void    allocation_error();
+void    extension_error();
+void    game_usage();
 
 /*
     @-General function:
 */
-int     ft_strlen(char *data);
-char    *ft_strtrim(char *to_trim);
 int     getend(char *data);
 int     getstart(char *data);
+char    *ft_strtrim(char *to_trim);
+char	*ft_strrchr(char *str, int c);
+int     ft_strcmp(char *s1, char *s2);
+char	*ft_strndup(char *to_dup, int len);
 
+/*
+    @-Get_line function:
+*/
+size_t	ft_strlen(char *s); 
+int		ft_strchr(char *s);
+char	*ft_strdup(char *s);
+char	*get_next_line(int fd);
+char	*get_next_line(int fd);
+char	*to_stocked(char *rest);
+char	*extract_line(char *buffer);
+char	*ft_strjoin(char *s1, char *s2);
+char	*read_untilnl(char *joined, int fd);
+char	*ft_substr(char *s, unsigned int start, size_t len);
+
+/*
+    @-extension checker:
+*/
+void    extensionvalidity(char *filename);
+
+/*
+    @-Epur line (clean line):
+*/
+void	get_new_string(char *commande, t_var var);
+void	data_init(t_var *vars, char *commande);
+int     word_epur_helper(char *commande);
+int     epur_len_helper(char *commande);
+char	*epur_string(char *commande);
+/*
+    @-textures build list :
+*/
+t_textures  *build_member(char *t_path, enum e_path direct);
+void        addmember(t_textures **head, t_textures *newmember);
+
+/*
+    @-SPLIT : FUNCTION
+*/
+char	**ft_split(char *s, char c);
 #endif

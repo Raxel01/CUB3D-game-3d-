@@ -1,0 +1,22 @@
+# CUB3D-game-3d-
+Cub3d 42 Project.
+/********************************************************/
+/*                    CHANGE SAVER();                   */
+/*you are luck this file will save you on day so write  */
+/********************************************************/
+
+START CODING CUB3D :
+    @-First of things Read the MAP;
+    waynei zerbaaaa hadiii hh;
+
+I will send as structure with elems;
+where textures ptr is a ptr to a linked list of textures;
+
+then get the F and C colors;
+the end steep is this one : char **map;
+/*********************************************************/
+CHECKED CASE :
+    I read the line;
+    check the validity of line should have 3ella l2a9al caractere differ de ascii ::
+        32[space]; [TAB];[\n];
+    
