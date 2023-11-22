@@ -33,10 +33,19 @@ void    addmember(t_textures **head, t_textures *newmember)
     }
 }
 
-// t_rgb   *creatnode()
-// {
+t_rgb   *creatnode(long *purergb, enum e_floorciel it_type)
+{
+    t_rgb   *node;
 
-// }
+    node = malloc(sizeof(t_rgb));
+    if (!node)
+        return(allocation_error(), NULL);
+    node->rgb = purergb;
+    node->type = it_type;
+    node->member = 0;
+    node->next = NULL;
+    return (node);
+}
 
 void    linknodes(t_rgb **head, t_rgb *newelem)
 {

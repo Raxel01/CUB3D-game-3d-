@@ -19,4 +19,19 @@ CHECKED CASE :
     I read the line;
     check the validity of line should have 3ella l2a9al caractere differ de ascii ::
         32[space]; [TAB];[\n];
+/****************************START HARD MODE*******************/
+    TEST ALL LEAK POSSIBLITY AND IT'S GOOD FOR THE MOMENT'
+/**************************************************************/
+START CODING AT : 10:30->
+ check the rgb splitted aray cases:
+ case of :
+        @-the comm in rgb ar less that ar great than 2; mean r,g,b,X ,,,,,,,,,,, 
+            let rgb == NULL, then error;
+            @-if rgb[0] == NULL; address rgb allocced exist, free (rgb); error case ,, no word or no separator;
+        @-case where : no 3 elements as r,g error;
+        @-so here kanforcer 3llik Trespecter a,b,c morraha antchecki duk a b c wach f range dyal digit ulla la;
+        hadchi kayfekerni f push SWAP yalaraw3aaaa;
+TACHE SUCCESSED :...... 3 : 15/push day  
+        
+
     

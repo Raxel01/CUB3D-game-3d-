@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 02:55:14 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/21 18:44:00 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/11/22 13:30:48 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ enum    e_floorciel
 
 typedef struct rgb
 {
-    long rgb[3];
+    long *rgb;
     enum e_floorciel type;
     size_t member;
     struct rgb *next;
@@ -103,13 +103,14 @@ void    game_usage();
 */
 int     getend(char *data);
 int     getstart(char *data);
+long    ft_atoi(const char *str);
 char    *ft_strtrim(char *to_trim);
 char	*ft_strrchr(char *str, int c);
 int     ft_strcmp(char *s1, char *s2);
 char	*ft_strndup(char *to_dup, int len);
 
 /*
-    @-Get_line function:
+    @-Getline function:
 */
 size_t	ft_strlen(char *s); 
 int		ft_strchr(char *s);
@@ -142,7 +143,13 @@ t_textures  *build_member(char *t_path, enum e_path direct);
 void        addmember(t_textures **head, t_textures *newmember);
 
 /*
+    @-color[r,g,b] buildlist :
+*/
+t_rgb   *creatnode(long *purergb, enum e_floorciel it_type);
+void    linknodes(t_rgb **head, t_rgb *newelem);
+/*
     @-SPLIT : FUNCTION
 */
-char	**ft_split(char *s, char c);
+char    **ft_split(char *s, char c);
+size_t	ft_strlcpy(char *dst, char *src, size_t size);
 #endif

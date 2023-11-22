@@ -1,7 +1,10 @@
-       WE         ./path_to_the_west_texture
-      SO          ./path_to_the_south_texture
-NO ./path_to_the_north_texture
+       WE         Global_main.c
+       
+     SO          Global_main.c
+
+NO Global_main.c
+
       EA         ./path_to_the_EA_texture   
 
-    F      ,,,
-C     lops 
+C     11,12,13
+    F      211,0,55

@@ -6,29 +6,11 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:38:24 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/21 18:34:42 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/11/21 20:01:00 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../HEADER/Parsing.h"
-
-size_t	ft_strlcpy(char *dst, char *src, size_t size)
-{
-	size_t	i;
-	size_t	lens;
-
-	lens = ft_strlen(src);
-	if (size == 0)
-		return (lens);
-	i = 0;
-	while (src[i] && i < (size - 1))
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (lens);
-}
 
 static int	ft_words(char const *s, char c)
 {

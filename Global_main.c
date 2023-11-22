@@ -1,6 +1,7 @@
 #include "./HEADER/Parsing.h"
 
 const char	*path_type[] = {"NORD", "SOUTH", "WEST", "EAST"};
+const char	*color_type[] = {"FLOOR", "CIEL"};
 
 void    extensionvalidity(char *filename)
 {
@@ -199,20 +200,108 @@ void    east_link(int fd, t_gamedata *data, char *line)
         throwtextures(fd, line, data);
     }
 }
-void    verifygrammar(int fd, char *line, int index, t_gamedata *data)
+
+char **freearray(char **array)
+{
+    int i;
+
+    i = -1;
+    while(array[++i])
+        free(array[i]);
+    free(array);
+    array = NULL;
+    return (array);
+}
+
+int	input_state(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] >= 48 && str[i] <= 57)
+			i++;
+		else
+			return (0);
+	}
+	return (1);
+}
+
+long	*checkrange(char **rgb, int fd, char *line, t_gamedata *data)
+{
+	int	i;
+    long *purergb;
+
+	i = -1;
+	purergb = malloc(sizeof(long) * 3);
+	while (rgb[++i])
+		purergb[i] = ft_atoi(rgb[i]);
+    rgb = freearray(rgb);
+	i = -1;
+	while (++i < 3)
+	{
+		if (purergb[i] > 255 || purergb[i] < 0)
+		{
+			free(purergb);
+            error("COLOR : OUT OF RANG");
+            throwtextures(fd, line, data);
+		}
+	}
+	return (purergb);
+}
+
+long   *final_state(char **rgb, int fd, char *line, t_gamedata *data)
+{
+	int	i;
+
+	i = 0;
+	while (rgb[i])
+	{
+		if (!(input_state(rgb[i])))
+        {
+            error("\tInvalid color Type");
+            error("color elem can be just a digit:[0-255],...");
+            rgb = freearray(rgb);
+            throwtextures(fd, line, data);
+        }
+		i++;
+	}
+    return(checkrange(rgb, fd, line, data));
+}
+
+long    *rgb_status(char **rgb, int fd, char *line, t_gamedata *data)
+{
+    int i;
+    
+    i = -1;
+    if (rgb == NULL || rgb[0] == NULL)
+    {
+        if(rgb)
+            free(rgb);
+        error("\tCHECK GRAMMAR AND  RETRY : ");
+        error("\t   [ID][Space][r,g,b]");
+        throwtextures(fd, line, data);
+    }
+    while(rgb[++i]);
+    if (i != 3)
+    {
+        error("\tMAY you used this syntax : ");
+        error("\t::r,g:without entring bleu verify : ");
+        error("\t   [ID][Space][r,g,b]");
+        rgb = freearray(rgb);
+        throwtextures(fd, line, data);
+    }
+    return(final_state(rgb, fd, line, data));
+}
+
+long    *verifygrammar(int fd, char *line, int index, t_gamedata *data)
 {
     char **rgb;
-    int l = 0;
 
     rgb = ft_split(ft_strndup(line + index , \
         ft_strlen(line) - index), ',');
-    if (rgb == NULL)
-    {
-        error("CHECK GRAMMAR AND RETRY : ");
-        error("   [id][space][r,g,b]");
-        throwtextures(fd, line, data);
-    }
-
+    return(rgb_status(rgb, fd, line, data));
 }
 
 void    floorcolor(int fd, t_gamedata *data, char *line)
@@ -224,12 +313,13 @@ void    floorcolor(int fd, t_gamedata *data, char *line)
     while (line[index] && line[index] != ' ' && line[index] != '\t')
         index++;
     id = ft_strndup(line, index);
-     if (line[index] && line[index] == ' ' || line[index] == '\t')
+    if (line[index] && line[index] == ' ' || line[index] == '\t')
         index++;
     if (!cmp_textures(id, "F"))
     {
         free(id);
-        verifygrammar(fd, line, index, data);
+        linknodes(&data->color, \
+            creatnode(verifygrammar(fd, line, index, data), FLOOR));
     }
     else
     {
@@ -248,9 +338,13 @@ void    ceilingcolor(int fd, t_gamedata *data, char *line)
     while (line[index] && line[index] != ' ' && line[index] != '\t')
         index++;
     id = ft_strndup(line, index);
+    if (line[index] && line[index] == ' ' || line[index] == '\t')
+        index++;
     if (!cmp_textures(id, "C"))
     {
         free(id);
+        linknodes(&data->color, \
+            creatnode(verifygrammar(fd, line, index, data), CIEL));
     }
     else
     {
@@ -334,15 +428,54 @@ void    importtextures(int fd, t_gamedata *data)
 
 void    required_textures(int fd, t_gamedata *data)
 {
-    if (data->texture->size != 4)
+    if (data->texture)
     {
-        free_textures(&data->texture);
-        close(fd);
-        write(2, "-YOU HAVE MAY ENTRED ", 21);
-        write(2, "A NON VALID ELEMENT : [in 6] ", 29);
-        write(2, "First line so : \n", 17);
-        display_error("\tERROR OCCURED : NO ENOUGH TEXTURES");
+        if (data->texture->size != 4)
+        {
+            free_textures(&data->texture);
+            close(fd);
+            write(2, "Required: 4 textures", 20);
+            write(2, "(EA WE SO NO)\n", 14);
+            display_error("\tERROR OCCURED : NO ENOUGH TEXTURES");
+        }
     }
+}
+
+void    requiredcolor(int fd, t_gamedata *data)
+{
+    if (data->color)
+    {
+        if (data->color->member != 2)
+        {
+            free_textures(&data->texture);
+            free_color(&data->color);
+            close(fd);
+            display_error("\tERROR : NO ENOUGH COLOR FOR CIELFLOOR");
+        }
+    }
+}
+
+void        textureaccessiblity(int fd, t_gamedata *data)
+{
+    t_textures *curs;
+    int acces;
+
+    acces = 0;
+    curs = data->texture;
+    while(curs)
+    {
+        acces = open(curs->path, O_RDONLY, 0666);
+        if (acces == -1)
+        {
+            error("\tInaccessible Texture");
+            free_textures(&data->texture);
+            free_color(&data->color);
+            close(fd);
+            display_error("");
+        }
+        curs = curs->next;
+    } 
+
 }
 
 void    parsing(int fd, char **av, t_gamedata *data)
@@ -350,6 +483,8 @@ void    parsing(int fd, char **av, t_gamedata *data)
     extensionvalidity(av[1]);
     importtextures(fd, data);
     required_textures(fd, data);
+    requiredcolor(fd, data);
+    textureaccessiblity(fd, data);
 }
 
 void    initial_check(int *fd, int ac, char **av)
@@ -368,8 +503,45 @@ void    init_game(t_gamedata *data)
     data->color = NULL;
 }
 
+void    leaks()
+{
+    system("leaks cub");
+}
+
+void    print_color(t_rgb **begin)
+{
+    t_rgb	*cursur;
+    int i;
+    i = 0;
+
+	if (!(*begin))
+    {
+        write(1, "EMPTY\n", 6);
+		return ;
+    }
+    cursur = (*begin);
+	printf("*********************************\n");
+	printf("*       colors     |   TYPE     *\n");
+	printf("*********************************\n");
+	while (cursur)
+	{
+        printf("r: %lu,g: %lu, b: %lu | %s\t*\n", \
+            cursur->rgb[0], cursur->rgb[1], cursur->rgb[2], color_type[cursur->type]);
+		printf("*********************************\n");
+		cursur = cursur->next;
+	}
+
+}
+
+void    claimgamedata(t_gamedata *data)
+{
+    free_color(&data->color);
+    free_textures(&data->texture);
+}
+
 int main (int ac, char **av)
 {
+    atexit(leaks);
     int fd;
     t_gamedata data;
     
@@ -377,14 +549,6 @@ int main (int ac, char **av)
     initial_check(&fd, ac, av);
     init_game(&data);
     parsing(fd, av, &data);
-    print_textures(&data.texture);
-    char *EOf = get_next_line(fd);
-    // free_textures(&data.texture);
-    // while(1);
-    // printf("OK\n");
-    // char *newline = ft_strtrim("     |NO LOL  ./path_to_lol|      ");
-    // printf("%s\n", newline);
-    // free(newline);
-    // execution(parsing(fd));
+    claimgamedata(&data);
     return (0);
 }

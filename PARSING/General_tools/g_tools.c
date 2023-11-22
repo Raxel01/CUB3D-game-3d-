@@ -1,4 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   g_tools.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/21 20:02:00 by abait-ta          #+#    #+#             */
+/*   Updated: 2023/11/21 20:02:01 by abait-ta         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../HEADER/Parsing.h"
+
+size_t	ft_strlcpy(char *dst, char *src, size_t size)
+{
+	size_t	i;
+	size_t	lens;
+
+	lens = ft_strlen(src);
+	if (size == 0)
+		return (lens);
+	i = 0;
+	while (src[i] && i < (size - 1))
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (lens);
+}
 
 int getstart(char *data)
 {

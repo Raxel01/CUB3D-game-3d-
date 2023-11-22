@@ -6,7 +6,7 @@
 #    By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/11 03:18:17 by abait-ta          #+#    #+#              #
-#    Updated: 2023/11/21 13:08:59 by abait-ta         ###   ########.fr        #
+#    Updated: 2023/11/22 15:42:10 by abait-ta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ $(NAME): $(HEADER) $(OBJ)
 	@$(CC) $(CFLAGS) -o $@  $(OBJ)
 
 %.o : %.c $(HEADER)
-	@$(CC)  $(CFLAGS) -c  $< -o  $@	
+	@$(CC)  $(CFLAGS) -c  $<  -o  $@	
 
 clean :
 	@$(RM) $(OBJ)
