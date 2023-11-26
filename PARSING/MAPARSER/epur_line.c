@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 18:55:28 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/20 19:04:19 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/11/23 18:58:01 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,3 +94,4 @@ char	*epur_string(char *commande)
 	free(commande);
 	return (var.begin);
 }
+

@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:38:24 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/21 20:01:00 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/11/23 11:21:37 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,15 @@ int check_comma(char *s)
     return (comma);
 }
 
-char	**ft_split(char *s, char c)
+/*if color = 1 then I check the color case*/
+/*else if 0 I'm sing split for other things*/
+char	**ft_split(char *s, char c, int color)
 {
     t_split split;
 
-    if (check_comma(s) != 2 || !s)
-        return(free(s), NULL);
+	if (color == 1)
+    	if (check_comma(s) != 2 || !s)
+        	return(free(s), NULL);
 	split.i = -1;
 	split.words = ft_words(s, c);
 	split.str = (char **)malloc(sizeof(char *) * (split.words + 1));

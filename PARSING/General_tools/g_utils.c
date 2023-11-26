@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:57:50 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/22 12:57:52 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/11/23 19:35:37 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,28 @@ long	ft_atoi(const char *str)
 		i++;
 	}
 	return (natija * lichara);
+}
+
+int skipcontent(char *line, int i, char c)
+{
+    int start;
+
+    start = i;
+    i++;
+    while (line[i] && line[i] != c)
+        i++;
+    if (!line[i])
+        return (start);
+    return (i);
+}
+
+int	cmp_textures(char *s1, char *s2)
+{
+	int	i;
+	if (s1 == NULL)
+		return (404);
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }
