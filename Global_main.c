@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 12:37:41 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/26 19:43:35 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/11/27 16:23:21 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,8 @@ void   elementanalyser(int fd, t_gamedata *data)
             c = data->map[line][column];
             if (diff(c))
             {
-                claimgamedata(fd, data);
                 write(2, &c, 1);
+                claimgamedata(fd, data);
                 display_error(" :<<- ERROR : Weird element in The Map");
             }
             if (playersign(c))
@@ -209,8 +209,8 @@ void    verifyendline(char *line, int fd, t_gamedata *data)
         i--;
     if (line[i] != '1')
     {
-        claimgamedata(fd, data);
         write(2, &line[i], 1);
+        claimgamedata(fd, data);
         write(2, " : None 1 caractere", 19);
         display_error(" at the end of line");
     }
@@ -256,28 +256,6 @@ int firstun(char *map)
     return (3);
 }
 
-void replbyspace(char **dupmap)
-{
-    int i;
-    int j;
-
-    i = 0;
-    while (dupmap[i])
-    {
-        j = 0;
-        while(dupmap[i][j])
-        {
-            if ((i != 0 && i != getheight(dupmap) - 1 ) && (dupmap[i][j] == '0' || (dupmap[i][j] == '1' && (j != 0 && j != (ft_strlen(dupmap[i]) - 1 ) && j != firstun(dupmap[i])))))
-                write(1, " ", 1);
-            else
-                write(1, &dupmap[i][j], 1);
-            j++;
-        }
-        write(1, "\n", 1);
-    i++;
-    }
-}
-
 void updown_checker(int fd, t_gamedata *data, int i, int firstone)
 {
     while (firstone >= 0)
@@ -300,8 +278,8 @@ void    verifybeginline(char *line, int fd, t_gamedata *data)
         i++;
     if(line[i] != '1')
     {
-        claimgamedata(fd, data);
         write(2, &line[i], 1);
+        claimgamedata(fd, data);
         display_error(" : None 1 caractere at begin");
     }
 }
@@ -339,7 +317,141 @@ void    handleborder(int fd, t_gamedata *data)
     // while(data->map[++i])
     //     dupmap[i] = ft_strdup(data->map[i]);
     // dupmap[i] = NULL;
-    // replbyspace(dupmap);
+}
+
+int     getlastone(char *line)
+{
+    int i;
+
+    i = ft_strlen(line) - 1;
+    while(line[i] && line[i] == ' ')
+        i--;
+    return (i);
+}
+
+typedef struct pos
+{
+    int     player_x;
+    int     player_y;
+    int     tall_line;
+    int     countspace;
+    int     height;
+    char    **clonedmap;
+}   t_playerinfo;
+
+void    init_pos(t_playerinfo *pos)
+{
+    pos->clonedmap = NULL;
+    pos->player_x = 0;
+    pos->player_y = 0;
+    pos->tall_line = 0;
+    pos->countspace = 0;
+    pos->height = 0;
+}
+
+void    findplayer(t_gamedata *data, t_playerinfo *pos)
+{
+    int line;
+    int column;
+    char c;
+
+    line = -1;
+    pos->tall_line = ft_strlen(data->map[0]);
+    while(data->map[++line])
+    {
+        if (ft_strlen(data->map[line]) > pos->tall_line)
+            pos->tall_line = ft_strlen(data->map[line]) + 1;
+        column = -1;
+        while(data->map[line][++column])
+        {
+            c = data->map[line][column];
+            if (c == 'N' || c == 'E' || c == 'W' || c == 'S')
+                {
+                    pos->player_x = column;
+                    pos->player_y = line;
+                }
+            if (c == ' ')
+                pos->countspace++;
+        }
+    }
+    pos->height = line + 1;
+}
+
+char    *fillcopy(char *dest, char *src, int size)
+{
+    int     i;
+
+    i = -1;
+    while (src[++i])
+        dest[i] = src[i];
+    while(i < size - 1)
+    {
+        dest[i] = ' ';
+        i++;
+    }
+    dest[i] = '\0';
+    free(src);
+    return (dest);
+}
+
+char    *reallocer(char *line, int size)
+{
+    char *new;
+
+    new = malloc(sizeof(char) * size);
+    if (!new)
+        return (allocation_error(), NULL);
+    new = fillcopy(new, line, size);
+    return(new);
+}
+
+void    طباعةـالشبكة(t_gamedata *data,  t_playerinfo *pos)
+{
+    int i;
+    
+    pos->clonedmap = malloc(sizeof(char *) * pos->height);
+    i = -1;
+    while(data->map[++i])
+        pos->clonedmap[i] = reallocer(ft_strdup(data->map[i]), pos->tall_line + 1);
+    pos->clonedmap[i] = NULL;
+}
+
+void	ft_recursif(t_gamedata *data, t_playerinfo *pos, int y, int x)
+{
+	if (pos->clonedmap[y][x] == '1' || pos->clonedmap[y][x] == '#')
+		return ;
+    // if (pos->clonedmap[y][x] == ' ')
+    //    flag = 1;
+    pos->clonedmap[y][x] = '#';
+	// if (flag)
+    //     {
+    //         claimgamedata(19, data);
+    //         display_error("bad acces to space");
+    //     }
+    ft_recursif(data, pos, y - 1, x);
+	ft_recursif(data, pos, y + 1, x);
+	ft_recursif(data, pos, y, x - 1);
+	ft_recursif(data, pos, y, x + 1);
+}
+
+void getinfo(t_gamedata *data, t_playerinfo *pos)
+{
+    findplayer(data, pos);
+    طباعةـالشبكة(data, pos);
+    ft_recursif(data, pos, pos->player_y, pos->player_x);
+    int i;
+    i = 0;
+    while(pos->clonedmap[i])
+        printf("%s\n", pos->clonedmap[i++]);
+}
+
+void   _norequiredacces(int fd, t_gamedata *data)
+{
+    t_playerinfo pos;
+
+    init_pos(&pos);
+    getinfo(data,&pos);
+    
 }
 
 void    mapanalyser(int fd, t_gamedata *data)
@@ -347,6 +459,7 @@ void    mapanalyser(int fd, t_gamedata *data)
     elementanalyser(fd, data);
     onlyplayer(fd, data);
     handleborder(fd, data);
+    _norequiredacces(fd, data);
 }
 
 void    parsing(int fd, char **av, t_gamedata *data)

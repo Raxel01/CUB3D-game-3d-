@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 02:55:14 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/25 14:50:53 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/11/26 21:32:20 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,11 @@ int     getend(char *data);
 int     getstart(char *data);
 long    ft_atoi(const char *str);
 char    *ft_strtrim(char *to_trim);
-int	cmp_textures(char *s1, char *s2);
 char	*ft_strrchr(char *str, int c);
 int     ft_strcmp(char *s1, char *s2);
+int     ft_strcmp(char *s1, char *s2);
+char	*ft_strrchr(char *str, int c);
+int     cmp_textures(char *s1, char *s2);
 char	*ft_strndup(char *to_dup, int len);
 int     skipcontent(char *line, int i, char c);
 
