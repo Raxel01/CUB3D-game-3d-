@@ -6,13 +6,13 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 19:23:30 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/23 19:38:14 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:40:36 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../HEADER/Parsing.h"
 
-void    south_link(int fd, t_gamedata *data, char *line)
+void    south_link(t_gamedata *data, char *line)
 {
     int j;
     char *identifier;
@@ -33,11 +33,11 @@ void    south_link(int fd, t_gamedata *data, char *line)
     {
         free(identifier);
         write(2, "SO: IDENTIFIER ERROR\n", 21);
-        throwtextures(fd, line, data);
+        throwtextures(line, data);
     }
 }
 
-void    nord_link(int fd, t_gamedata *data, char *line)
+void    nord_link(t_gamedata *data, char *line)
 {
     int j;
     char *identifier;
@@ -58,13 +58,13 @@ void    nord_link(int fd, t_gamedata *data, char *line)
     {
         free(identifier);
         write(2, "NO: IDENTIFIER ERROR\n", 21);
-        throwtextures(fd, line, data);
+        throwtextures(line, data);
     }
 }
 
 /*TEXTURES GRAMMAR : [ID](SPCAE)[PATH]*/
 /*COLOR GRAMMAR    :[ID](SPCAE)[R,G,B]*/
-void    recognize_textures(int fd, t_gamedata *data, char *line)
+void    recognize_textures(t_gamedata *data, char *line)
 {
     int     i;
     int     whitespaces;
@@ -75,19 +75,19 @@ void    recognize_textures(int fd, t_gamedata *data, char *line)
     if (whitespaces == 1)
     {
         if (line[i] == 'N')
-            nord_link(fd, data, line);
+            nord_link(data, line);
         else if (line[i] == 'S')
-            south_link(fd, data, line);
+            south_link(data, line);
         else if (line[i] == 'W')
-            west_link(fd, data, line);
+            west_link(data, line);
         else if (line[i] == 'E')
-            east_link(fd, data, line);
+            east_link(data, line);
         else
-            recognize_color(fd, data, line);
+            recognize_color(data, line);
         free(line);
     }
     else
-        throwtextures(fd, line, data);
+        throwtextures(line, data);
 }
 
 int validline(char *line)
@@ -106,24 +106,24 @@ int validline(char *line)
     return (0);
 }
 
-void    importtextures(int fd, t_gamedata *data)
+void    importtextures(t_gamedata *data)
 {
     int     i;
     char    *line;
 
     i = 0;
-    line = get_next_line(fd);
+    line = get_next_line(data->fd);
     while (line && i < 6)
     {
         if (validline(line))
         {
-            recognize_textures(fd, data, line);
+            recognize_textures(data, line);
             i++;
         }
         else
             free(line);
         if(i == 6)
             break;
-        line = get_next_line(fd);
+        line = get_next_line(data->fd);
     }
 }

@@ -6,14 +6,14 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 19:29:51 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/24 15:11:33 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:43:08 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../HEADER/Parsing.h"
 
 
-void    east_link(int fd, t_gamedata *data, char *line)
+void    east_link(t_gamedata *data, char *line)
 {
     int j;
     char *identifier;
@@ -34,12 +34,12 @@ void    east_link(int fd, t_gamedata *data, char *line)
     {
         free(identifier);
         write(2, "EA: IDENTIFIER ERROR\n", 21);
-        throwtextures(fd, line, data);
+        throwtextures(line, data);
     }
 }
 
 /*check if the file exist if not -> acces == -1 Error*/
-void        textureaccessiblity(int fd, t_gamedata *data)
+void        textureaccessiblity(t_gamedata *data)
 {
     t_textures *curs;
     int acces;
@@ -55,7 +55,7 @@ void        textureaccessiblity(int fd, t_gamedata *data)
             error(" : Inaccessible Texture");
             free_textures(&data->texture);
             free_color(&data->color);
-            close(fd);
+            close(data->fd);
             display_error("");
         }
         close(acces);
@@ -82,13 +82,13 @@ int getspaces(char *line)
     return (whitespaces);
 }
 
-void    required_textures(int fd, t_gamedata *data)
+void    required_textures(t_gamedata *data)
 {
         if (!data->texture || data->texture->size != 4)
         {
             free_textures(&data->texture);
             free_color(&data->color);
-            close(fd);
+            close(data->fd);
             write(2, "Required: 4 textures", 20);
             write(2, "(EA WE SO NO)\n", 14);
             display_error("\tERROR OCCURED : NO ENOUGH TEXTURES");

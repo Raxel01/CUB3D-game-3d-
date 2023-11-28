@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 02:55:14 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/26 21:32:20 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:23:04 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct data
     char **map;
     t_rgb   *color;
     int onlyplayers;
+    int fd;
 }   t_gamedata;
 
 typedef struct trim
@@ -81,6 +82,16 @@ typedef struct variable
 	char				*epured_string;
 	char				*begin;
 }						t_var;
+
+typedef struct pos
+{
+    int     player_x;
+    int     player_y;
+    int     tall_line;
+    int     countspace;
+    int     height;
+    char    **clonedmap;
+}   t_playerinfo;
 
 typedef struct split
 {
@@ -161,8 +172,8 @@ size_t	ft_strlcpy(char *dst, char *src, size_t size);
 /*
     @-[Claim: Memory]
 */
-void    throwtextures(int fd, char *line, t_gamedata *data);
-void    claimgamedata(int fd, t_gamedata *data);
+void    throwtextures(char *line, t_gamedata *data);
+void    claimgamedata(t_gamedata *data);
 void	free_textures(t_textures **texture);
 char    **freearray(char **array);
 void    free_color(t_rgb **color);
@@ -171,26 +182,26 @@ void    free_color(t_rgb **color);
 */
 int     validline(char *line);
 int     getspaces(char *line);
-void    importtextures(int fd, t_gamedata *data);
-void    required_textures(int fd, t_gamedata *data);
-void    textureaccessiblity(int fd, t_gamedata *data);
-void    west_link(int fd, t_gamedata *data, char *line);
-void    nord_link(int fd, t_gamedata *data, char *line);
-void    east_link(int fd, t_gamedata *data, char *line);
-void    south_link(int fd, t_gamedata *data, char *line);
-void    recognize_textures(int fd, t_gamedata *data, char *line);
+void    importtextures(t_gamedata *data);
+void    required_textures(t_gamedata *data);
+void    textureaccessiblity(t_gamedata *data);
+void    west_link(t_gamedata *data, char *line);
+void    nord_link(t_gamedata *data, char *line);
+void    east_link(t_gamedata *data, char *line);
+void    south_link(t_gamedata *data, char *line);
+void    recognize_textures(t_gamedata *data, char *line);
 /*
     @-[COLOR: IMPORTATION]
 */
-long    *verifygrammar(int fd, char *line, int index, t_gamedata *data);
-long   *final_state(char **rgb, int fd, char *line, t_gamedata *data);
-long	*checkrange(char **rgb, int fd, char *line, t_gamedata *data);
-long    *rgb_status(char **rgb, int fd, char *line, t_gamedata *data);
-void    recognize_color(int fd, t_gamedata *data, char *line);
-void    ceilingcolor(int fd, t_gamedata *data, char *line);
-void    floorcolor(int fd, t_gamedata *data, char *line);
-void    west_link(int fd, t_gamedata *data, char *line);
-void    requiredcolor(int fd, t_gamedata *data);
+long    *verifygrammar(char *line, int index, t_gamedata *data);
+long   *final_state(char **rgb, char *line, t_gamedata *data);
+long	*checkrange(char **rgb, char *line, t_gamedata *data);
+long    *rgb_status(char **rgb, char *line, t_gamedata *data);
+void    recognize_color(t_gamedata *data, char *line);
+void    ceilingcolor(t_gamedata *data, char *line);
+void    floorcolor(t_gamedata *data, char *line);
+void    west_link(t_gamedata *data, char *line);
+void    requiredcolor(t_gamedata *data);
 int     input_state(char *str);
 
 #endif

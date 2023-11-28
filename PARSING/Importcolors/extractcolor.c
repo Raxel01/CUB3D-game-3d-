@@ -6,13 +6,13 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 19:33:25 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/23 19:38:48 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:35:51 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../HEADER/Parsing.h"
 
-void    west_link(int fd, t_gamedata *data, char *line)
+void    west_link(t_gamedata *data, char *line)
 {
     int j;
     char *identifier;
@@ -33,20 +33,20 @@ void    west_link(int fd, t_gamedata *data, char *line)
     {
         free(identifier);
         write(2, "WE: IDENTIFIER ERROR\n", 21);
-        throwtextures(fd, line, data);
+        throwtextures(line, data);
     }
 }
 
-long    *verifygrammar(int fd, char *line, int index, t_gamedata *data)
+long    *verifygrammar(char *line, int index, t_gamedata *data)
 {
     char **rgb;
 
     rgb = ft_split(ft_strndup(line + index , \
         ft_strlen(line) - index), ',', 1);
-    return(rgb_status(rgb, fd, line, data));
+    return(rgb_status(rgb, line, data));
 }
 
-void    ceilingcolor(int fd, t_gamedata *data, char *line)
+void    ceilingcolor(t_gamedata *data, char *line)
 {
     int     index;
     char    *id;
@@ -61,17 +61,17 @@ void    ceilingcolor(int fd, t_gamedata *data, char *line)
     {
         free(id);
         linknodes(&data->color, \
-            creatnode(verifygrammar(fd, line, index, data), CIEL));
+            creatnode(verifygrammar(line, index, data), CIEL));
     }
     else
     {
         free(id);
         write(2, "C: IDENTIFIER ERROR\n", 21);
-        throwtextures(fd, line, data);
+        throwtextures(line, data);
     }
 }
 
-void    floorcolor(int fd, t_gamedata *data, char *line)
+void    floorcolor(t_gamedata *data, char *line)
 {
     int     index;
     char    *id;
@@ -86,20 +86,20 @@ void    floorcolor(int fd, t_gamedata *data, char *line)
     {
         free(id);
         linknodes(&data->color, \
-            creatnode(verifygrammar(fd, line, index, data), FLOOR));
+            creatnode(verifygrammar(line, index, data), FLOOR));
     }
     else
     {
         free(id);
         write(2, "F: IDENTIFIER ERROR\n", 21);
-        throwtextures(fd, line, data);
+        throwtextures(line, data);
     }
 }
 
-void    recognize_color(int fd, t_gamedata *data, char *line)
+void    recognize_color(t_gamedata *data, char *line)
 {
     if (line[0] == 'F')
-        floorcolor(fd, data, line);
+        floorcolor(data, line);
     else if (line[0] == 'C')
-        ceilingcolor(fd, data, line);
+        ceilingcolor(data, line);
 }

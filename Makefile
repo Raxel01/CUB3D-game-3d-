@@ -6,7 +6,7 @@
 #    By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/11 03:18:17 by abait-ta          #+#    #+#              #
-#    Updated: 2023/11/27 16:54:58 by abait-ta         ###   ########.fr        #
+#    Updated: 2023/11/28 13:38:58 by abait-ta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,10 +36,10 @@ NAME = cub3d
 all : $(NAME)
 
 $(NAME): $(HEADER) $(OBJ)
-	@$(CC) $(CFLAGS)   -o  $@ $(OBJ)
+	@$(CC) $(CFLAGS) -fsanitize=address -g  -o  $@ $(OBJ)
 
 %.o : %.c $(HEADER)
-	@$(CC)  $(CFLAGS) -c $<  -o  $@ 
+	@$(CC)  $(CFLAGS) -c $<  -o  $@ -fsanitize=address -g
 
 clean :
 	@$(RM) $(OBJ)
