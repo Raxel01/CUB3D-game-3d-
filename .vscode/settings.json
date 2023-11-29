@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"game.h": "c",
+		"parsing.h": "c",
+		"algorithm": "c",
+		"locale": "c"
+	}
+}

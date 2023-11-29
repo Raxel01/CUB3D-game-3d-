@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+         #
+#    By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/11 03:18:17 by abait-ta          #+#    #+#              #
-#    Updated: 2023/11/27 16:54:58 by abait-ta         ###   ########.fr        #
+#    Updated: 2023/11/29 11:16:39 by tben-dal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,17 +17,25 @@ PARS_M    = ./PARSING/MAPARSER
 PARS_COL  = ./PARSING/Importcolors
 PARS_TEXT = ./PARSING/Importtextures
 PARS_MEM  = ./parsing/Memory_clean
+RUN_GAME  = ./RunGame
+
+RUN_GAME_SRC = $(RUN_GAME)/rungame.c $(RUN_GAME)/keys.c $(RUN_GAME)/start.c $(RUN_GAME)/start_utils.c \
+				$(RUN_GAME)/drawFunction.c $(RUN_GAME)/gets.c $(RUN_GAME)/update.c $(RUN_GAME)/moves_functions.c \
+				$(RUN_GAME)/check_utils.c
 
 SRC = Global_main.c $(PARS_M)/import_map.c $(PARSING_D)/display_errors.c $(PARSING_G)/g_tools.c $(PARSING_G)/g_usage.c \
 $(PARSING_G)/g_utils.c $(PARS_L)/get_next_line.c $(PARS_L)/get_next_line_utils.c $(PARS_M)/textures_builder.c \
 $(PARSING_G)/g_epurline.c $(PARS_COL)/extractcolor.c $(PARS_COL)/rgbchecker.c $(PARS_TEXT)/extractextures.c \
-$(PARS_TEXT)/sequelextract.c $(PARS_MEM)/claimmemory.c
+$(PARS_TEXT)/sequelextract.c $(PARS_MEM)/claimmemory.c $(RUN_GAME_SRC)
  
-HEADER = ./HEADER/Parsing.h
+
+HEADER = ./HEADER/Parsing.h ./HEADER/game.h
 
 CC = cc
 
 FLAGS = -Wall -Wextra -Werror
+
+MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit
 
 OBJ = ${SRC:.c=.o}
 
@@ -36,7 +44,7 @@ NAME = cub3d
 all : $(NAME)
 
 $(NAME): $(HEADER) $(OBJ)
-	@$(CC) $(CFLAGS)   -o  $@ $(OBJ)
+	@$(CC) $(CFLAGS) $(MLX_FLAGS)  -o  $@ $(OBJ)
 
 %.o : %.c $(HEADER)
 	@$(CC)  $(CFLAGS) -c $<  -o  $@ 

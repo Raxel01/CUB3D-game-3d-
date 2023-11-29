@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 02:55:14 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/26 21:32:20 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/11/28 18:35:28 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,5 +192,7 @@ void    floorcolor(int fd, t_gamedata *data, char *line);
 void    west_link(int fd, t_gamedata *data, char *line);
 void    requiredcolor(int fd, t_gamedata *data);
 int     input_state(char *str);
+
+
 
 #endif

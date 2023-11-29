@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   Global_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 12:37:41 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/27 16:23:21 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/11/28 18:54:03 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./HEADER/Parsing.h"
+#include "./HEADER/game.h"
+
 
 const char	*path_type[] = {"NORD", "SOUTH", "WEST", "EAST"};
 const char	*color_type[] = {"FLOOR", "CIEL"};
@@ -520,6 +522,13 @@ void    print_color(t_rgb **begin)
 
 }
 
+// get the map from the data and put it in the cub3d struct for the game
+// recu_data(t_gamedata data)
+// {
+//     data.cub3d.map_info.map = data.map;
+// }
+
+
 int main (int ac, char **av)
 {
     int fd;
@@ -528,7 +537,10 @@ int main (int ac, char **av)
     fd = 0;
     initial_check(&fd, ac, av);
     init_game(&data);
+    // recu_data(data);
     parsing(fd, av, &data);
-    claimgamedata(fd,&data);
+    // claimgamedata(fd,&data);
+    // printMap(data.map);
+    run_game(data);
     return (0);
 }
