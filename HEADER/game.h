@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:37:53 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/11/29 20:18:20 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/11/30 15:00:47 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,21 @@ typedef struct dda
 	double	y2;
 }			t_dda;
 
-typedef struct tmp
+typedef struct rays
 {
-	double	x;
-	double	y;
-}			t_tmp;
+	double	ray_angle;
+	double	wall_hit_x;
+	double	wall_hit_y;
+	double	distance;
+	
+}			t_rays;
 
 typedef struct Player
 {
 	double	y;
 	double	x;
+	double	back_y;
+	double	back_x;
 	double	radius;
 	double	rotation_angle;
 	double	turn_direction;
@@ -119,11 +124,18 @@ void	move_down(t_cub3d *game);
 void	move_right(t_cub3d *game);
 void	move_left(t_cub3d *game);
 
+// turn functions
+void	turn_right(t_cub3d *game);
+void	turn_left(t_cub3d *game);
+
 // check functions
 int	check_wall_collision(t_cub3d game);
 
 // start functions
 void	start(t_cub3d *game);
+
+// init functions
+void	init_player(t_cub3d *game);
 
 // start_utils functions
 void	ft_maplen(t_cub3d *game);

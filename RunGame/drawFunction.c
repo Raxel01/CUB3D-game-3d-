@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 21:27:47 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/11/29 20:57:00 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/11/30 14:59:16 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,33 +19,34 @@ void	dda(t_cub3d game,int color)
 	double	x_inc;
 	double	y_inc;
 	double	length;
-	int		i;
 
-	i = 0;
 	delta_x = game.dda.x2 - game.dda.x1;
 	delta_y = game.dda.y2 - game.dda.y1;
 	if (fabs(delta_x) > fabs(delta_y))
-		length = delta_x;
+		length = fabs(delta_x);
 	else
-		length = delta_y;
+		length = fabs(delta_y);
 	x_inc = delta_x / length;
 	y_inc = delta_y / length;
-	while (i < length)
+	while (length-- > 0)
 	{
-		puts("here");
 		my_mlx_pixel_put(&game.img, round(game.dda.x1), round(game.dda.y1), color);
 		game.dda.x1 += x_inc;
 		game.dda.y1 += y_inc;
-		i++;
 	}
+}
+
+void	draw_rays(t_cub3d game)
+{
+	double	ray_angle;
 }
 
 void	draw_line(t_cub3d *game, int x, int y, int color)
 {
 	game->dda.x1 = x;
 	game->dda.y1 = y;
-	game->dda.x2 = cos(game->player.rotation_angle) * 40 + x;
-	game->dda.y2 = sin(game->player.rotation_angle) * 40 + y;
+	game->dda.x2 = cos(game->player.rotation_angle) * 20 + x;
+	game->dda.y2 = sin(game->player.rotation_angle) * 20 + y;
 	dda(*game, color);
 }
 
@@ -57,12 +58,12 @@ void	draw_player(t_cub3d game)
 	int		y_player;
 	
 	y = 0;
-	y_player = game.player.y - game.map_info.tile_size / 4;
-	x_player = game.player.x - game.map_info.tile_size / 4;
-	while (y < game.map_info.tile_size / 2)
+	y_player = game.player.y - game.map_info.tile_size / 8;
+	x_player = game.player.x - game.map_info.tile_size / 8;
+	while (y < game.map_info.tile_size / 4)
 	{
 		x = 0;
-		while (x < game.map_info.tile_size / 2)
+		while (x < game.map_info.tile_size / 4)
 		{
 			my_mlx_pixel_put(&game.img, x_player + x, y_player + y, RED);
 			x++;
