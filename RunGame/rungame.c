@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:06 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/11/30 15:02:13 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/11/30 17:46:27 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	init_struct(t_cub3d *game ,t_gamedata pars)
 void	run_game(t_gamedata pars)
 {
 	t_cub3d	game;
+	
 	
 	init_struct(&game, pars);
 	game.mlx_ptr = mlx_init();

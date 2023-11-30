@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 21:27:47 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/11/30 14:59:16 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/11/30 18:30:38 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,14 @@ void	dda(t_cub3d game,int color)
 	double	delta_y;
 	double	x_inc;
 	double	y_inc;
+	double	x;
+	double	y;
 	double	length;
 
-	delta_x = game.dda.x2 - game.dda.x1;
-	delta_y = game.dda.y2 - game.dda.y1;
+	x = game.player.x;
+	y = game.player.y;
+	delta_x = game.dda.x2 - game.player.x;
+	delta_y = game.dda.y2 - game.player.y;
 	if (fabs(delta_x) > fabs(delta_y))
 		length = fabs(delta_x);
 	else
@@ -30,23 +34,16 @@ void	dda(t_cub3d game,int color)
 	y_inc = delta_y / length;
 	while (length-- > 0)
 	{
-		my_mlx_pixel_put(&game.img, round(game.dda.x1), round(game.dda.y1), color);
-		game.dda.x1 += x_inc;
-		game.dda.y1 += y_inc;
+		my_mlx_pixel_put(&game.img, round(x), round(y), color);
+		x += x_inc;
+		y += y_inc;
 	}
 }
 
-void	draw_rays(t_cub3d game)
+void	draw_line(t_cub3d *game, int color)
 {
-	double	ray_angle;
-}
-
-void	draw_line(t_cub3d *game, int x, int y, int color)
-{
-	game->dda.x1 = x;
-	game->dda.y1 = y;
-	game->dda.x2 = cos(game->player.rotation_angle) * 20 + x;
-	game->dda.y2 = sin(game->player.rotation_angle) * 20 + y;
+	game->dda.x2 = cos(game->player.rotation_angle) * 20 + game->player.x;
+	game->dda.y2 = sin(game->player.rotation_angle) * 20 + game->player.y;
 	dda(*game, color);
 }
 

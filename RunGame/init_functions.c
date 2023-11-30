@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:34:54 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/11/30 15:02:19 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/11/30 18:38:34 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,16 @@
 
 void	init_rays(t_cub3d *game)
 {
-	
+	int i;
+
+	i = 0;
+	game->num_rays = game->width;
+	game->rays = malloc(sizeof(t_rays) * game->width);
+	// while (i < game->width)
+	// {
+	// 	game->rays[i].ray_angle = game->player.rotation_angle - (game->player.field_of_view / 2);
+	// 	i++;
+	// }
 }
 
 void	init_player(t_cub3d *game)
@@ -28,4 +37,5 @@ void	init_player(t_cub3d *game)
 	game->player.walk_speed = 2;
 	game->player.turn_speed = 0.1;
 	game->player.rotation_angle = 0;
+	game->player.field_of_view = 60 * (M_PI / 180);
 }

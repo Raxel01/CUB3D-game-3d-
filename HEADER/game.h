@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:37:53 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/11/30 15:00:47 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/11/30 21:15:09 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,12 @@ typedef struct dda
 typedef struct rays
 {
 	double	ray_angle;
-	double	wall_hit_x;
-	double	wall_hit_y;
-	double	distance;
-	
+	double	hxintersection;
+	double	hyintersection;
+	double	vxintersection;
+	double	vyintersection;
+	double	hit_d_h;
+	double	hit_d_v;
 }			t_rays;
 
 typedef struct Player
@@ -80,6 +82,7 @@ typedef struct Player
 	double	back_x;
 	double	radius;
 	double	rotation_angle;
+	double	field_of_view;
 	double	turn_direction;
 	double	turn_speed;
 	double	walk_speed;
@@ -97,11 +100,12 @@ typedef struct cub3d
 	void		*win_ptr;
 	int			height;
 	int			width;
+	int			num_rays;
 	t_player	player;
 	t_map		map_info;
 	t_gamedata 	pars;
 	t_data		img;
-	t_tmp		tmp;
+	t_rays		*rays;
 	t_dda		dda;
 }			t_cub3d;
 
@@ -110,6 +114,7 @@ void	run_game(t_gamedata pars);
 
 //mlx_utils functions
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	init_rays(t_cub3d *game);
 
 // mlx_hook functions
 int	close_win(t_cub3d *cub3d);
@@ -143,10 +148,13 @@ void	ft_maplen(t_cub3d *game);
 // update functions
 int	update(t_cub3d *game);
 
+// cast rays functions
+void	cast_all_rays(t_cub3d *game);
+
 // draw functions
 void	draw_map(t_cub3d game);
 void	draw_player(t_cub3d game);
-void	draw_line(t_cub3d *game, int x, int y, int color);
+void	draw_line(t_cub3d *game, int color);
 void	dda(t_cub3d game, int color);
 
 // gets functions
