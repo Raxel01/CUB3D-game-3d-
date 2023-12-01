@@ -6,7 +6,7 @@
 #    By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/11 03:18:17 by abait-ta          #+#    #+#              #
-#    Updated: 2023/11/30 18:25:18 by tben-dal         ###   ########.fr        #
+#    Updated: 2023/12/01 16:32:04 by tben-dal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ HEADER = ./HEADER/Parsing.h ./HEADER/game.h
 
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror -g -Ofast
 
 MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit
 

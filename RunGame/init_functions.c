@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:34:54 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/11/30 18:38:34 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/01 16:58:21 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ void	init_player(t_cub3d *game)
 	game->player.is_turn_left = 0;
 	game->player.walk_speed = 2;
 	game->player.turn_speed = 0.1;
-	game->player.rotation_angle = 0;
+	// game->player.rotation_angle = 0;
 	game->player.field_of_view = 60 * (M_PI / 180);
 }

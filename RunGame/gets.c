@@ -6,23 +6,22 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 09:33:27 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/11/30 12:53:49 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/01 12:02:56 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../HEADER/game.h"
 
-double	get_start_angle(t_cub3d game, char player_direction)
+void	get_start_angle(t_cub3d *game, char player_direction)
 {
 	if (player_direction == 'N')
-		return (270 * M_PI / 180);
+		game->player.rotation_angle = 270 * M_PI / 180;
 	else if (player_direction == 'S')
-		return (90 * M_PI / 180);
+		game->player.rotation_angle = 90 * M_PI / 180;
 	else if (player_direction == 'E')
-		return (0 * M_PI / 180);
+		game->player.rotation_angle = 0 * M_PI / 180;
 	else if (player_direction == 'W')
-		return (180 * M_PI / 180);
-	return (0 * M_PI / 180);
+		game->player.rotation_angle = 180 * M_PI / 180;
 }
 
 void	get_player_position(t_cub3d *game)
@@ -39,7 +38,7 @@ void	get_player_position(t_cub3d *game)
 			if (game->pars.map[y][x] == 'N' || game->pars.map[y][x] == 'S' ||
 				game->pars.map[y][x] == 'E' || game->pars.map[y][x] == 'W')
 			{
-				game->player.rotation_angle = get_start_angle(*game, game->pars.map[y][x]);
+				get_start_angle(game, game->pars.map[y][x]);
 				game->player.x = (x * game->map_info.tile_size) + (game->map_info.tile_size / 2);
 				game->player.y = (y * game->map_info.tile_size) + (game->map_info.tile_size / 2);
 				return ;
