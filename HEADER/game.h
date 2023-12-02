@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:37:53 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/02 18:00:08 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/02 19:52:34 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct map
 {
 	char	**map;
 	int		tile_size;
+	int		mini_tile_size;
 	int		len_y;
 	int		len_x;
 	int		x;

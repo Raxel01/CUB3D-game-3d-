@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 17:58:36 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/02 18:11:00 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/02 20:15:46 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,13 @@ void	cast_all_rays(t_cub3d *game)
 		{
 			game->dda.x2 = game->rays[rays_id].hxintersection;
 			game->dda.y2 = game->rays[rays_id].hyintersection;
-			dda(*game, GREY);
+			// dda(*game, GREY);
 		}
 		else
 		{
 			game->dda.x2 = game->rays[rays_id].vxintersection;
 			game->dda.y2 = game->rays[rays_id].vyintersection;
-			dda(*game, GREY);
+			// dda(*game, GREY);
 		}
 		game->rays[rays_id + 1].ray_angle = game->rays[rays_id].ray_angle;
 		game->rays[++rays_id].ray_angle += game->player.field_of_view / game->num_rays;
