@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 17:58:36 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/01 16:56:45 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/02 18:11:00 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	get_h_d_ray(t_cub3d *game, int rays_id)
 	double	stepy;
 	int		offset;
 	
-	offset = 1;
+	offset = 0;
 	game->rays[rays_id].hyintersection = floor(game->player.y / game->map_info.tile_size) * game->map_info.tile_size;
 	if (sin(game->rays[rays_id].ray_angle) > 0)
 		game->rays[rays_id].hyintersection += game->map_info.tile_size;
@@ -27,12 +27,14 @@ void	get_h_d_ray(t_cub3d *game, int rays_id)
 	if (sin(game->rays[rays_id].ray_angle) < 0)
 	{
 		stepy *= -1;
-		offset *= -1;
+		offset = 1;
 	}
+	else if (sin(game->rays[rays_id].ray_angle) == 0)
+		stepy = 0;
 	stepx = stepy / tan(game->rays[rays_id].ray_angle);
 	while((game->rays[rays_id].hxintersection / game->map_info.tile_size) >= 0 && (game->rays[rays_id].hxintersection / game->map_info.tile_size) < game->map_info.len_x && (game->rays[rays_id].hyintersection / game->map_info.tile_size) >= 0 && (game->rays[rays_id].hyintersection / game->map_info.tile_size) < game->map_info.len_y)
 	{
-		if (game->pars.map[(int)((game->rays[rays_id].hyintersection + offset) / game->map_info.tile_size)][(int)((game->rays[rays_id].hxintersection) / game->map_info.tile_size)] == '1')
+		if (game->pars.map[(int)((game->rays[rays_id].hyintersection - offset) / game->map_info.tile_size)][(int)((game->rays[rays_id].hxintersection) / game->map_info.tile_size)] == '1')
 			break;
 		game->rays[rays_id].hxintersection += stepx;
 		game->rays[rays_id].hyintersection += stepy;
@@ -45,7 +47,7 @@ void	get_v_d_ray(t_cub3d *game, int rays_id)
 	double	stepy;
 	int		offset;
 
-	offset = 1;
+	offset = 0;
 	game->rays[rays_id].vxintersection = (floor(game->player.x / game->map_info.tile_size)) * game->map_info.tile_size;
 	if (cos(game->rays[rays_id].ray_angle) > 0)
 		game->rays[rays_id].vxintersection += game->map_info.tile_size;
@@ -54,12 +56,14 @@ void	get_v_d_ray(t_cub3d *game, int rays_id)
 	if (cos(game->rays[rays_id].ray_angle) < 0)
 	{
 		stepx *= -1;
-		offset *= -1;
+		offset = 1;
 	}
+	else if (cos(game->rays[rays_id].ray_angle) == 0)
+		stepx = 0;
 	stepy = stepx * tan(game->rays[rays_id].ray_angle);
 	while((game->rays[rays_id].vxintersection / game->map_info.tile_size) >= 0 && (game->rays[rays_id].vxintersection / game->map_info.tile_size) < game->map_info.len_x && (game->rays[rays_id].vyintersection / game->map_info.tile_size) >= 0 && (game->rays[rays_id].vyintersection / game->map_info.tile_size) < game->map_info.len_y)
 	{
-		if (game->pars.map[(int)((game->rays[rays_id].vyintersection) / game->map_info.tile_size)][(int)((game->rays[rays_id].vxintersection + offset) / game->map_info.tile_size)] == '1')
+		if (game->pars.map[(int)((game->rays[rays_id].vyintersection) / game->map_info.tile_size)][(int)((game->rays[rays_id].vxintersection - offset) / game->map_info.tile_size)] == '1')
 			break;
 		game->rays[rays_id].vxintersection += stepx;
 		game->rays[rays_id].vyintersection += stepy;
@@ -82,21 +86,15 @@ void	cast_all_rays(t_cub3d *game)
 		{
 			game->dda.x2 = game->rays[rays_id].hxintersection;
 			game->dda.y2 = game->rays[rays_id].hyintersection;
-			dda(*game, RED);
+			dda(*game, GREY);
 		}
 		else
 		{
 			game->dda.x2 = game->rays[rays_id].vxintersection;
 			game->dda.y2 = game->rays[rays_id].vyintersection;
-			dda(*game, RED);
+			dda(*game, GREY);
 		}
-		// printf("rays_id = %d\n", rays_id);
-		// printf("hut_d_h = %f hit_d_v = %f\n", game->rays[rays_id].hit_d_h, game->rays[rays_id].hit_d_v);
-		// printf("game->rays[%d].ray_angle = %f\n", rays_id, game->rays[rays_id].ray_angle);
 		game->rays[rays_id + 1].ray_angle = game->rays[rays_id].ray_angle;
-		// printf("rays_id + 1 = %d\n", rays_id);
-		// printf("game->rays[%d + 1].ray_angle = %f\n", rays_id, game->rays[rays_id + 1].ray_angle);
 		game->rays[++rays_id].ray_angle += game->player.field_of_view / game->num_rays;
-		// printf("player.rotation_angle = %f\n", game->player.rotation_angle);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 21:27:47 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/11/30 18:30:38 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/02 17:55:15 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,35 @@ void	dda(t_cub3d game,int color)
 	y_inc = delta_y / length;
 	while (length-- > 0)
 	{
-		my_mlx_pixel_put(&game.img, round(x), round(y), color);
+		my_mlx_pixel_put(&game.img, x, y, color);
+		x += x_inc;
+		y += y_inc;
+	}
+}
+
+void	dda_wall(t_cub3d game,int color)
+{
+	double	delta_x;
+	double	delta_y;
+	double	x_inc;
+	double	y_inc;
+	double	x;
+	double	y;
+	double	length;
+
+	x = game.dda.x1;
+	y = game.dda.y1;
+	delta_x = game.dda.x2 - x;
+	delta_y = game.dda.y2 - y;
+	if (fabs(delta_x) > fabs(delta_y))
+		length = fabs(delta_x);
+	else
+		length = fabs(delta_y);
+	x_inc = delta_x / length;
+	y_inc = delta_y / length;
+	while (length-- > 0)
+	{
+		my_mlx_pixel_put(&game.img, x, y, color);
 		x += x_inc;
 		y += y_inc;
 	}
@@ -105,7 +133,10 @@ void	draw_map(t_cub3d game)
 		{
 			if (game.pars.map[game.map_info.y][game.map_info.x] == '1')
 				put_square(game, x_pixel, y_pixel, WHITE);
-			else if (game.pars.map[game.map_info.y][game.map_info.x] == '0')
+			else if (game.pars.map[game.map_info.y][game.map_info.x] == '0'
+				||
+				game.pars.map[game.map_info.y][game.map_info.x] == 'N' || game.pars.map[game.map_info.y][game.map_info.x] == 'S' ||
+				game.pars.map[game.map_info.y][game.map_info.x] == 'E' || game.pars.map[game.map_info.y][game.map_info.x] == 'W')
 				put_square(game, x_pixel, y_pixel, BLACK);
 			x_pixel += game.map_info.tile_size;
 			game.map_info.x++;

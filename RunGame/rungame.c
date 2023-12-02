@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:06 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/01 16:59:13 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/02 16:33:37 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_struct(t_cub3d *game ,t_gamedata pars)
 	game->height = 1080;
 	game->width = 1920;
 	game->pars = pars;
-	game->map_info.tile_size = 64;
+	game->map_info.tile_size = 32;
 	init_player(game);
 	init_rays(game);
 }

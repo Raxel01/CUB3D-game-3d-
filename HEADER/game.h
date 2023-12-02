@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:37:53 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/11/30 21:15:09 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/02 18:00:08 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,39 @@
 #define YELLOW 0x00FFFF00
 #define PURPLE 0x00FF00FF
 #define CYAN 0x0000FFFF
+#define GREY 0x00A9A9A9
+#define ORANGE 0x00FFA500
+#define BROWN 0x00A52A2A
+#define PINK 0x00FFC0CB
+#define LIME 0x00BFFF00
+#define MAGENTA 0x00FF00FF
+#define MAROON 0x00800000
+#define OLIVE 0x00808000
+#define TEAL 0x00008080
+#define NAVY 0x00000080
+#define SKY 0x0087CEEB
+#define SEAGREEN 0x002E8B57
+#define FORESTGREEN 0x00228B22
+#define GOLD 0x00FFD700
+#define FIREBRICK 0x00B22222
+#define CRIMSON 0x00DC143C
+#define DARKORANGE 0x00FF8C00
+#define DARKORCHID 0x009932CC
+#define DARKSLATEBLUE 0x00483D8B
+#define DARKTURQUOISE 0x0000CED1
+#define DEEPPINK 0x00FF1493
+#define DEEPSKYBLUE 0x0000BFFF
+#define DIMGRAY 0x00696969
+#define DODGERBLUE 0x001E90FF
+#define GOLDENROD 0x00DAA520
+#define GREENYELLOW 0x00ADFF2F
+#define HOTPINK 0x00FF69B4
+#define INDIANRED 0x00CD5C5C
+#define INDIGO 0x004B0082
+#define KHAKI 0x00F0E68C
+#define LAWNGREEN 0x007CFC00
+#define LIGHTCORAL 0x00F08080
+#define SKYBLUE 0x0087CEEB
 
 
 typedef struct	s_data {
@@ -156,6 +189,8 @@ void	draw_map(t_cub3d game);
 void	draw_player(t_cub3d game);
 void	draw_line(t_cub3d *game, int color);
 void	dda(t_cub3d game, int color);
+void	dda_wall(t_cub3d game,int color);
+void	wall_rendring(t_cub3d *game);
 
 // gets functions
 void	get_player_position(t_cub3d *game);
