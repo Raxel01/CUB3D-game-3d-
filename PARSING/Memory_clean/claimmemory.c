@@ -12,21 +12,21 @@
 
 #include "../../HEADER/Parsing.h"
 
-void throwtextures(char *line, t_gamedata *data)
+void	throwtextures(char *line, t_gamedata *data)
 {
-    free(line);
-    free_textures(&data->texture);
-    free_color(&data->color);
-    close(data->fd);
-    display_error("|- TEXTURES ERROR -|");
+	free(line);
+	free_textures(&data->texture);
+	free_color(&data->color);
+	close(data->fd);
+	display_error("|- TEXTURES ERROR -|");
 }
 
-void    claimgamedata(t_gamedata *data)
+void	claimgamedata(t_gamedata *data)
 {
-    free_color(&data->color);
-    free_textures(&data->texture);
-    data->map = freearray(data->map);
-    close(data->fd);
+	free_color(&data->color);
+	free_textures(&data->texture);
+	data->map = freearray(data->map);
+	close(data->fd);
 }
 
 void	free_textures(t_textures **texture)
@@ -40,32 +40,33 @@ void	free_textures(t_textures **texture)
 		free(cursur->path);
 		free(cursur);
 	}
-    (*texture) = NULL;
+	(*texture) = NULL;
 }
 
-void    free_color(t_rgb **color)
+void	free_color(t_rgb **color)
 {
-    t_rgb	*cursur;
+	t_rgb	*cursur;
 
-    while (*color)
+	while (*color)
 	{
 		cursur = *color;
 		(*color) = (*color)->next;
 		free(cursur->rgb);
 		free(cursur);
 	}
-    (*color) = NULL;
+	(*color) = NULL;
 }
 
-char **freearray(char **array)
+char	**freearray(char **array)
 {
-    int i;
-    if (array == NULL)
-        return (array);
-    i = -1;
-    while(array[++i])
-        free(array[i]);
-    free(array);
-    array = NULL;
-    return (array);
+	int	i;
+
+	if (array == NULL)
+		return (array);
+	i = -1;
+	while (array[++i])
+		free(array[i]);
+	free(array);
+	array = NULL;
+	return (array);
 }

@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   Global_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abait-ta <abait-ta@student.1337.ma >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 12:37:41 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/28 21:05:03 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/11/30 22:10:35 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./HEADER/Parsing.h"
 
-const char	*path_type[] = {"NORD", "SOUTH", "WEST", "EAST"};
-const char	*color_type[] = {"FLOOR", "CIEL"};
+// const char	*path_type[] = {"NORD", "SOUTH", "WEST", "EAST"};
+// const char	*color_type[] = {"FLOOR", "CIEL"};
 
-void    extensionvalidity(char *filename)
+void	extensionvalidity(char *filename)
 {
 	char	*find_ext;
 	int		check;
 
-	find_ext = ft_strrchr (filename, '.');
-	check = ft_strcmp (find_ext, ".cub");
+	find_ext = ft_strrchr(filename, '.');
+	check = ft_strcmp(find_ext, ".cub");
 	if (check != 0)
-        extension_error();
+		extension_error();
 }
 
 // void	print_textures(t_textures **begin)
@@ -47,34 +47,33 @@ void    extensionvalidity(char *filename)
 // 	}
 // }
 
-void    parsing(char **av, t_gamedata *data)
+void	parsing(char **av, t_gamedata *data)
 {
-    importtextures(data);
-    required_textures(data);
-    requiredcolor(data);
-    textureaccessiblity(data);
-    extractmap(data);
-    mapanalyser(data);
+	importtextures(data);
+	required_textures(data);
+	requiredcolor(data);
+	textureaccessiblity(data);
+	extractmap(data);
+	mapanalyser(data);
 }
 
-
-void    init_game(int mapfd, t_gamedata *data)
+void	init_game(int mapfd, t_gamedata *data)
 {
-    data->texture = NULL;
-    data->map = NULL;
-    data->color = NULL;
-    data->onlyplayers = 0;
-    data->fd = mapfd;
+	data->texture = NULL;
+	data->map = NULL;
+	data->color = NULL;
+	data->onlyplayers = 0;
+	data->fd = mapfd;
 }
 
-void    initial_check(int *fd, int ac, char **av)
+void	initial_check(int *fd, int ac, char **av)
 {
-    if (ac != 2)
-        display_error("@-PLEASE ENTER ENOUGH ARGUMENTS");
-    extensionvalidity(av[1]);
-    *fd = open(av[1], O_RDONLY, 0777);
-    if (*fd == -1)
-        display_error(strerror(errno));
+	if (ac != 2)
+		display_error("@-PLEASE ENTER ENOUGH ARGUMENTS");
+	extensionvalidity(av[1]);
+	*fd = open(av[1], O_RDONLY, 0777);
+	if (*fd == -1)
+		display_error(strerror(errno));
 }
 
 // void    leaks()
@@ -98,22 +97,23 @@ void    initial_check(int *fd, int ac, char **av)
 // 	printf("*********************************\n");
 // 	while (cursur)
 // 	{
-//         printf("r: %lu,g: %lu, b: %lu | %s\t*\n", \
-//             cursur->rgb[0], cursur->rgb[1], cursur->rgb[2], color_type[cursur->type]);
+//         printf("r: %lu,g: %lu, b: %lu | %s\t*\n", 
+//             cursur->rgb[0], cursur->rgb[1], cursur->rgb[2],
+	// color_type[cursur->type]);
 // 		printf("*********************************\n");
 // 		cursur = cursur->next;
 // 	}
 // }
 
-int main (int ac, char **av)
+int	main(int ac, char **av)
 {
-    int fd;
-    t_gamedata data;
+	int			fd;
+	t_gamedata	data;
 
-    fd = 0;
-    initial_check(&fd, ac, av);
-    // init_game(fd, &data);
-    // parsing(av, &data);
-    // claimgamedata(&data);
-    return (0);
+	fd = 0;
+	initial_check(&fd, ac, av);
+	init_game(fd, &data);
+	parsing(av, &data);
+	claimgamedata(&data);
+	return (0);
 }

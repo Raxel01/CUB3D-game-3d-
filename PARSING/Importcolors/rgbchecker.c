@@ -14,22 +14,22 @@
 
 long	*checkrange(char **rgb, char *line, t_gamedata *data)
 {
-	int	i;
-    long *purergb;
+	int		i;
+	long	*purergb;
 
 	i = -1;
 	purergb = malloc(sizeof(long) * 3);
 	while (rgb[++i])
 		purergb[i] = ft_atoi(rgb[i]);
-    rgb = freearray(rgb);
+	rgb = freearray(rgb);
 	i = -1;
 	while (++i < 3)
 	{
 		if (purergb[i] > 255 || purergb[i] < 0)
 		{
 			free(purergb);
-            error("COLOR : OUT OF RANG");
-            throwtextures(line, data);
+			error("COLOR : OUT OF RANG");
+			throwtextures(line, data);
 		}
 	}
 	return (purergb);
@@ -50,7 +50,7 @@ int	input_state(char *str)
 	return (1);
 }
 
-long   *final_state(char **rgb, char *line, t_gamedata *data)
+long	*final_state(char **rgb, char *line, t_gamedata *data)
 {
 	int	i;
 
@@ -58,49 +58,50 @@ long   *final_state(char **rgb, char *line, t_gamedata *data)
 	while (rgb[i])
 	{
 		if (!(input_state(rgb[i])))
-        {
-            error("\tInvalid color Type");
-            error("color elem can be just a digit:[0-255],...");
-            rgb = freearray(rgb);
-            throwtextures(line, data);
-        }
+		{
+			error("\tInvalid color Type");
+			error("color elem can be just a digit:[0-255],...");
+			rgb = freearray(rgb);
+			throwtextures(line, data);
+		}
 		i++;
 	}
-    return(checkrange(rgb, line, data));
+	return (checkrange(rgb, line, data));
 }
 
-long    *rgb_status(char **rgb, char *line, t_gamedata *data)
+long	*rgb_status(char **rgb, char *line, t_gamedata *data)
 {
-    int i;
-    
-    i = -1;
-    if (rgb == NULL || rgb[0] == NULL)
-    {
-        if(rgb)
-            free(rgb);
-        error("\tCHECK GRAMMAR AND  RETRY : ");
-        error("\t   [ID][Space][r,g,b]");
-        throwtextures(line, data);
-    }
-    while(rgb[++i]);
-    if (i != 3)
-    {
-        error("\tMAY you used this syntax : ");
-        error("\t::r,g:without entring bleu verify : ");
-        error("\t   [ID][Space][r,g,b]");
-        rgb = freearray(rgb);
-        throwtextures(line, data);
-    }
-    return(final_state(rgb, line, data));
+	int	i;
+
+	i = -1;
+	if (rgb == NULL || rgb[0] == NULL)
+	{
+		if (rgb)
+			free(rgb);
+		error("\tCHECK GRAMMAR AND  RETRY : ");
+		error("\t   [ID][Space][r,g,b]");
+		throwtextures(line, data);
+	}
+	while (rgb[++i])
+		;
+	if (i != 3)
+	{
+		error("\tMAY you used this syntax : ");
+		error("\t::r,g:without entring bleu verify : ");
+		error("\t   [ID][Space][r,g,b]");
+		rgb = freearray(rgb);
+		throwtextures(line, data);
+	}
+	return (final_state(rgb, line, data));
 }
 
-void    requiredcolor(t_gamedata *data)
+void	requiredcolor(t_gamedata *data)
 {
-        if (!data->color || data->color->member != 2)
-        {
-            free_textures(&data->texture);
-            free_color(&data->color);
-            close(data->fd);
-            display_error("\tERROR : NO ENOUGH COLOR FOR CIELFLOOR");
-        }
+	if (!data->color || data->color->member != 2)
+	{
+		free_textures(&data->texture);
+		free_color(&data->color);
+		close(data->fd);
+		display_error("\tERROR : NO ENOUGH COLOR FOR CIELFLOOR");
+	}
 }

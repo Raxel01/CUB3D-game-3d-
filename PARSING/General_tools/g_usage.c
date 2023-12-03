@@ -63,31 +63,31 @@ static char	**ft_freetab(char **str, int tofree)
 	return (str);
 }
 
-int check_comma(char *s)
+int	check_comma(char *s)
 {
-    int i;
-    int comma;
+	int	i;
+	int	comma;
 
-    comma = 0;
-    i = 0;
-    while(s[i])
-    {
-        if (s[i] == ',')
-            comma++;
-        i++;
-    }
-    return (comma);
+	comma = 0;
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == ',')
+			comma++;
+		i++;
+	}
+	return (comma);
 }
 
 /*if color = 1 then I check the color case*/
 /*else if 0 I'm sing split for other things*/
 char	**ft_split(char *s, char c, int color)
 {
-    t_split split;
+	t_split	split;
 
 	if (color == 1)
-    	if (check_comma(s) != 2 || !s)
-        	return(free(s), NULL);
+		if (check_comma(s) != 2 || !s)
+			return (free(s), NULL);
 	split.i = -1;
 	split.words = ft_words(s, c);
 	split.str = (char **)malloc(sizeof(char *) * (split.words + 1));
@@ -104,6 +104,6 @@ char	**ft_split(char *s, char c, int color)
 		ft_strlcpy(split.str[split.i], split.tmp, split.len + 1);
 	}
 	split.str[split.i] = 0;
-    free(s);
+	free(s);
 	return (split.str);
 }
