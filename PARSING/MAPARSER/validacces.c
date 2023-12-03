@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validacces.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abait-ta <abait-ta@student.1337.ma >       +#+  +:+       +#+        */
+/*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 19:49:12 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/30 22:16:11 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/12/03 12:03:29 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,6 @@ void	player_acces(t_gamedata *data, t_playerinfo *pos)
 	find_fill(data, pos);
 	clone_mapgame(data, pos);
 	check_recursivly(data, pos, pos->player_y, pos->player_x);
-	i = -1;
-	while (pos->clonedmap[++i])
-		printf("%s\n", pos->clonedmap[i]);
 	pos->clonedmap = freearray(pos->clonedmap);
 }
 

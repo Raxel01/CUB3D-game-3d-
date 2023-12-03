@@ -37,8 +37,12 @@ I didn't use logfile this time cause I code fastly l3ibaat'
 make a recursion function that verify if the player can acces to any space on the map or not
 if he acces that mean there is an error else no problem;
 
+add 
 getnspace in first maps;
 then check the acces of the player to space
 make a copy of the map;
 then start using # in any place where player can walk;
 using recursion.
+
+add mouse functionnalities;
+include minimap;

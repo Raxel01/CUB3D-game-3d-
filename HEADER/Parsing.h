@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abait-ta <abait-ta@student.1337.ma >       +#+  +:+       +#+        */
+/*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 02:55:14 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/30 14:05:44 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/12/03 12:04:23 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,7 @@ void					handleborder(t_gamedata *data);
 int						firstun(char *map);
 void					handlstart(t_gamedata *data);
 void					verifybeginline(char *line, t_gamedata *data);
+void					upchecker(t_gamedata *data, int i, int firstone);
 void					updown_checker(t_gamedata *data, int i, int firstone);
 /*
 	@-[Border End]

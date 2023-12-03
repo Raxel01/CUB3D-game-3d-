@@ -3,25 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   border_begin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abait-ta <abait-ta@student.1337.ma >       +#+  +:+       +#+        */
+/*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 18:29:35 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/30 19:19:31 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/12/03 12:04:37 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../HEADER/Parsing.h"
 
-void	updown_checker(t_gamedata *data, int i, int firstone)
+void	downchecker(t_gamedata *data, int i, int firstone)
 {
-	while (firstone >= 0)
+	if (i != getheight(data->map) - 1)
 	{
-		if ((data->map[i - 1][firstone] == '0') || data->map[i
-			+ 1][firstone] == '0')
+		if (data->map[i + 1][firstone] == '0')
 		{
 			claimgamedata(data);
 			display_error("Error : OPEN MAP <-Left");
 		}
+	}
+}
+
+void	updown_checker(t_gamedata *data, int i, int firstone)
+{
+	while (firstone >= 0)
+	{
+		upchecker(data, i, firstone);
+		downchecker(data, i, firstone);
 		firstone--;
 	}
 }
@@ -37,7 +45,7 @@ int	firstun(char *map)
 			return (i);
 		i++;
 	}
-	return (3);
+	return (0);
 }
 
 void	verifybeginline(char *line, t_gamedata *data)

@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   border_end.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abait-ta <abait-ta@student.1337.ma >       +#+  +:+       +#+        */
+/*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 18:32:59 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/30 19:20:35 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/12/03 12:05:47 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../HEADER/Parsing.h"
+
+void	upchecker(t_gamedata *data, int i, int firstone)
+{
+	if (i != 0)
+	{
+		if (data->map[i - 1][firstone] == '0')
+		{
+			claimgamedata(data);
+			display_error("Error : OPEN MAP <-Left");
+		}
+	}
+}
 
 int	indexof_lastelem(char *line)
 {
