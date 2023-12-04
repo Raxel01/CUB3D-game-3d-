@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:37:53 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/02 19:52:34 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/04 18:27:21 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,20 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
+//for the texture
+typedef struct s_texture
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+	int		offset_x;
+	int		offset_y;
+}				t_texture;
+
 //for the map info
 typedef struct map
 {
@@ -100,12 +114,14 @@ typedef struct dda
 typedef struct rays
 {
 	double	ray_angle;
-	double	hxintersection;
-	double	hyintersection;
-	double	vxintersection;
-	double	vyintersection;
+	double	hxinter;
+	double	hyinter;
+	double	vxinter;
+	double	vyinter;
 	double	hit_d_h;
 	double	hit_d_v;
+	bool	is_hit_v;
+	bool	is_hit_h;
 }			t_rays;
 
 typedef struct Player
@@ -137,9 +153,10 @@ typedef struct cub3d
 	int			num_rays;
 	t_player	player;
 	t_map		map_info;
+	t_texture	texture[4];
 	t_gamedata 	pars;
 	t_data		img;
-	t_rays		*rays;
+	t_rays		rays;
 	t_dda		dda;
 }			t_cub3d;
 
@@ -184,6 +201,8 @@ int	update(t_cub3d *game);
 
 // cast rays functions
 void	cast_all_rays(t_cub3d *game);
+void	get_v_d_ray(t_cub3d *game);
+void	get_h_d_ray(t_cub3d *game);
 
 // draw functions
 void	draw_map(t_cub3d game);
@@ -192,6 +211,7 @@ void	draw_line(t_cub3d *game, int color);
 void	dda(t_cub3d game, int color);
 void	dda_wall(t_cub3d game,int color);
 void	wall_rendring(t_cub3d *game);
+void	textures(t_cub3d *game);
 
 // gets functions
 void	get_player_position(t_cub3d *game);

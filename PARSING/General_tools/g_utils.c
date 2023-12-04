@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   g_utils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abait-ta <abait-ta@student.1337.ma >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:57:50 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/26 21:32:53 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/11/30 19:01:55 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,23 @@ long	ft_atoi(const char *str)
 	return (natija * lichara);
 }
 
-int skipcontent(char *line, int i, char c)
+int	skipcontent(char *line, int i, char c)
 {
-    int start;
+	int	start;
 
-    start = i;
-    i++;
-    while (line[i] && line[i] != c)
-        i++;
-    if (!line[i])
-        return (start);
-    return (i);
+	start = i;
+	i++;
+	while (line[i] && line[i] != c)
+		i++;
+	if (!line[i])
+		return (start);
+	return (i);
 }
 
 int	cmp_textures(char *s1, char *s2)
 {
 	int	i;
+
 	if (s1 == NULL)
 		return (404);
 	i = 0;
@@ -79,12 +80,12 @@ char	*ft_strrchr(char *str, int c)
 
 	if (str == NULL)
 		return (NULL);
-	i = ft_strlen (str);
+	i = ft_strlen(str);
 	if (c == '\0')
 		return ((char *)(str + i));
 	while (i >= 0)
 	{
-		if ((char )str[i] == (char)c)
+		if ((char)str[i] == (char)c)
 		{
 			if (*(str + i - 1))
 				return ((char *)(str + i));

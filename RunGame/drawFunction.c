@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 21:27:47 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/02 20:11:24 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/03 14:27:47 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,12 @@ void	put_square(t_cub3d game, int x_pixel, int y_pixel, int color)
 	while (y < game.map_info.tile_size)
 	{
 		x = 0;
+		// printf("y_pixel = %d\n", y_pixel);
 		while (x < game.map_info.tile_size)
 		{
-			my_mlx_pixel_put(&game.img, x_pixel + x, y_pixel + y, color);
+		// printf("x_pixel = %d\n", x_pixel);
+			if (x_pixel + x < game.width && y_pixel + y < game.height)
+				my_mlx_pixel_put(&game.img, x_pixel + x, y_pixel + y, color);
 			x++;
 		}
 		y++;
@@ -133,11 +136,10 @@ void	draw_map(t_cub3d game)
 		{
 			if (game.pars.map[game.map_info.y][game.map_info.x] == '1')
 				put_square(game, x_pixel, y_pixel, WHITE);
-			else if (game.pars.map[game.map_info.y][game.map_info.x] == '0'
-				||
+			else if (game.pars.map[game.map_info.y][game.map_info.x] == '0' ||
 				game.pars.map[game.map_info.y][game.map_info.x] == 'N' || game.pars.map[game.map_info.y][game.map_info.x] == 'S' ||
 				game.pars.map[game.map_info.y][game.map_info.x] == 'E' || game.pars.map[game.map_info.y][game.map_info.x] == 'W')
-				put_square(game, x_pixel, y_pixel, BLACK);
+					put_square(game, x_pixel, y_pixel, BLACK);
 			x_pixel += game.map_info.tile_size;
 			game.map_info.x++;
 		}

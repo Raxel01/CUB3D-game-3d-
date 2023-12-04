@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:06 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/02 19:52:59 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/04 17:12:56 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void	init_struct(t_cub3d *game ,t_gamedata pars)
 {
-	game->height = 1080;
-	game->width = 1920;
+	game->height = 720;
+	game->width = 1280;
 	game->pars = pars;
 	game->map_info.tile_size = 32;
 	game->map_info.mini_tile_size =game->map_info.tile_size * 0.5;
@@ -27,8 +27,6 @@ void	init_struct(t_cub3d *game ,t_gamedata pars)
 void	run_game(t_gamedata pars)
 {
 	t_cub3d	game;
-	
-	
 	init_struct(&game, pars);
 	game.mlx_ptr = mlx_init();
 	game.win_ptr = mlx_new_window(game.mlx_ptr,

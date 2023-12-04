@@ -6,13 +6,13 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:29:09 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/02 20:14:10 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/04 18:05:37 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../HEADER/game.h"
 
-void clear_image(t_cub3d game)
+void draw_floor_cell(t_cub3d game)
 {
 	int i;
 	int j;
@@ -36,13 +36,11 @@ void clear_image(t_cub3d game)
 void	draw_update(t_cub3d game)
 {
 	mlx_clear_window(game.mlx_ptr, game.win_ptr);
-	game.img.img = mlx_new_image(game.mlx_ptr, game.width, game.height);
-	game.img.addr = mlx_get_data_addr(game.img.img, &game.img.bits_per_pixel,
-		&game.img.line_length, &game.img.endian);
-	clear_image(game);
+	draw_floor_cell(game);
 	wall_rendring(&game);
 	// draw_map(game);
 	cast_all_rays(&game);
+	// draw_line(&game, RED);
 	// draw_player(game);
 	mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img.img, 0, 0);
 }
