@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   Global_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abait-ta <abait-ta@student.1337.ma >       +#+  +:+       +#+        */
+/*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 12:37:41 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/30 22:10:35 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/12/03 13:51:11 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./HEADER/Parsing.h"
+#include "./HEADER/game.h"
 
 // const char	*path_type[] = {"NORD", "SOUTH", "WEST", "EAST"};
 // const char	*color_type[] = {"FLOOR", "CIEL"};
@@ -114,6 +115,7 @@ int	main(int ac, char **av)
 	initial_check(&fd, ac, av);
 	init_game(fd, &data);
 	parsing(av, &data);
+	run_game(data);
 	claimgamedata(&data);
 	return (0);
 }
