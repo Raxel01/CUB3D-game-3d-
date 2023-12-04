@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Global_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abait-ta <abait-ta@student.1337.ma >       +#+  +:+       +#+        */
+/*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 12:37:41 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/30 22:10:35 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/12/04 13:53:43 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,11 @@ void	initial_check(int *fd, int ac, char **av)
 // 	}
 // }
 
+// atexit(leaks);
 int	main(int ac, char **av)
 {
-	int			fd;
 	t_gamedata	data;
+	int			fd;
 
 	fd = 0;
 	initial_check(&fd, ac, av);

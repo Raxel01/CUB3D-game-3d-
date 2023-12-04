@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abait-ta <abait-ta@student.1337.ma >       +#+  +:+       +#+         #
+#    By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/11 03:18:17 by abait-ta          #+#    #+#              #
-#    Updated: 2023/12/02 22:23:55 by abait-ta         ###   ########.fr        #
+#    Updated: 2023/12/04 13:16:13 by abait-ta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,10 +38,10 @@ NAME = cub3D
 all : $(NAME)
 
 $(NAME): $(HEADER) $(OBJ)
-	@$(CC) $(CFLAGS) -fsanitize=address -g  -o  $@ $(OBJ)
+	@$(CC) $(CFLAGS)  -o  $@ $(OBJ)
 
 %.o : %.c $(HEADER)
-	@$(CC)  $(CFLAGS) -c $<  -o  $@ -fsanitize=address -g
+	@$(CC)  $(CFLAGS) -c $<  -o  $@
 
 clean :
 	@$(RM) $(OBJ)

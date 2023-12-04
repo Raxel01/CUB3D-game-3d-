@@ -46,3 +46,8 @@ using recursion.
 
 add mouse functionnalities;
 include minimap;
+/*************************************************************/
+        RECHECK CODE : STATE;
+   ---> DEBUGING MODE : NIKA7;
+BEGIN BY IMPORTTEXTURES;
+    START :

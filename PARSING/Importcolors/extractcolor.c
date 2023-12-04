@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extractcolor.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abait-ta <abait-ta@student.1337.ma >       +#+  +:+       +#+        */
+/*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 19:33:25 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/30 19:12:26 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/12/04 14:02:30 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	west_link(t_gamedata *data, char *line)
 	while (line[j] && line[j] != ' ' && line[j] != '\t')
 		j++;
 	identifier = ft_strndup(line, j);
-	if (line[j] && line[j] == ' ' || line[j] == '\t')
+	if (line[j] && (line[j] == ' ' || line[j] == '\t'))
 		j++;
 	if (!cmp_textures(identifier, "WE"))
 	{

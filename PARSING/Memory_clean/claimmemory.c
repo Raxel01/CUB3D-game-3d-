@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 19:43:29 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/28 15:39:55 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/12/04 13:34:48 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	throwtextures(char *line, t_gamedata *data)
 	free_textures(&data->texture);
 	free_color(&data->color);
 	close(data->fd);
-	display_error("|- TEXTURES ERROR -|");
+	display_error("\t|- TEXTURES ERROR -|");
 }
 
 void	claimgamedata(t_gamedata *data)
