@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 11:16:15 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/02 19:58:42 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/05 20:03:38 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ int	check_wall_collision(t_cub3d game)
 		x = 0;
 		while (x < 1)
 		{
-			if (game.pars.map[(int)((game.player.back_y + y) / game.map_info.tile_size)][(int)((game.player.back_x + x) / game.map_info.tile_size)] == '1') 
+			if (game.pars.map[(int)((game.player.back_y + y) \
+				/ game.info.tile_size)][(int)((game.player.back_x + x) \
+					/ game.info.tile_size)] == '1') 
 				return (0);
 			x++;
 		}

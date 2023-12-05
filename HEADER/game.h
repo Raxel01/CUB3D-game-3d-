@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:37:53 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/04 18:27:21 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/05 15:44:18 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,21 +83,21 @@ typedef struct s_texture
 	int		endian;
 	int		width;
 	int		height;
-	int		offset_x;
-	int		offset_y;
+	double		offset_x;
+	double		offset_y;
 }				t_texture;
 
 //for the map info
-typedef struct map
+typedef struct info
 {
 	char	**map;
 	int		tile_size;
-	int		mini_tile_size;
+	int		tex_size;
 	int		len_y;
 	int		len_x;
 	int		x;
 	int		y;
-}			t_map;
+}			t_info;
 
 typedef struct dda
 {
@@ -152,8 +152,8 @@ typedef struct cub3d
 	int			width;
 	int			num_rays;
 	t_player	player;
-	t_map		map_info;
-	t_texture	texture[4];
+	t_info		info;
+	t_texture	*texture;
 	t_gamedata 	pars;
 	t_data		img;
 	t_rays		rays;
@@ -192,9 +192,11 @@ void	start(t_cub3d *game);
 
 // init functions
 void	init_player(t_cub3d *game);
+int		init_textures(t_cub3d *game);
 
 // start_utils functions
 void	ft_maplen(t_cub3d *game);
+void	print_error(char *str);
 
 // update functions
 int	update(t_cub3d *game);
@@ -211,7 +213,6 @@ void	draw_line(t_cub3d *game, int color);
 void	dda(t_cub3d game, int color);
 void	dda_wall(t_cub3d game,int color);
 void	wall_rendring(t_cub3d *game);
-void	textures(t_cub3d *game);
 
 // gets functions
 void	get_player_position(t_cub3d *game);

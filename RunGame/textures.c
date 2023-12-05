@@ -6,20 +6,33 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:03:52 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/04 16:38:49 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/05 20:11:19 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../HEADER/game.h"
 
-void	textures(t_cub3d *game)
+int	init_textures(t_cub3d *game)
 {
-	// int	i;
+	int	i;
+	t_textures	*tmp;
 	
-	// i = 0;
-	// while (i < 4)
-	// {
-	// 	game->texture[i].img = mlx_xpm_file_to_image(game->mlx_ptr, "./TEXTURES/soni.xpm", &game->texture[i].width, &game->texture[i].height);
-	// 	i++;
-	// }
+	i = 0;
+	game->texture = malloc(sizeof(t_texture) * 4);
+	tmp = game->pars.texture;
+	while (tmp && i < 4)
+	{
+		game->texture[i].height = 0;
+		game->texture[i].width = 0;
+		game->texture[i].img = mlx_xpm_file_to_image(game->mlx_ptr,\
+			tmp->path, &game->texture[i].width, &game->texture[i].height);
+		if (!game->texture[i].img)
+			return (1);
+		game->texture[i].addr = mlx_get_data_addr(game->texture[i].img,\
+			&game->texture[i].bits_per_pixel, &game->texture[i].line_length,\
+				&game->texture[i].endian);
+		tmp = tmp->next;
+		i++;
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:01:08 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/04 16:39:10 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/05 10:07:38 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,5 @@ void	start(t_cub3d *game)
 		&game->img.line_length, &game->img.endian);
 	ft_maplen(game);
 	get_player_position(game);
-	// textures(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.img, 0, 0);
 }

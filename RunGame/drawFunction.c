@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 21:27:47 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/03 14:27:47 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/05 13:31:53 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,12 @@ void	draw_player(t_cub3d game)
 	int		y_player;
 	
 	y = 0;
-	y_player = game.player.y - game.map_info.tile_size / 8;
-	x_player = game.player.x - game.map_info.tile_size / 8;
-	while (y < game.map_info.tile_size / 4)
+	y_player = game.player.y - game.info.tile_size / 8;
+	x_player = game.player.x - game.info.tile_size / 8;
+	while (y < game.info.tile_size / 4)
 	{
 		x = 0;
-		while (x < game.map_info.tile_size / 4)
+		while (x < game.info.tile_size / 4)
 		{
 			my_mlx_pixel_put(&game.img, x_player + x, y_player + y, RED);
 			x++;
@@ -102,15 +102,12 @@ void	put_square(t_cub3d game, int x_pixel, int y_pixel, int color)
 	int x;
 	int y;
 
-	x = 0;
 	y = 0;
-	while (y < game.map_info.tile_size)
+	while (y < game.info.tile_size)
 	{
 		x = 0;
-		// printf("y_pixel = %d\n", y_pixel);
-		while (x < game.map_info.tile_size)
+		while (x < game.info.tile_size)
 		{
-		// printf("x_pixel = %d\n", x_pixel);
 			if (x_pixel + x < game.width && y_pixel + y < game.height)
 				my_mlx_pixel_put(&game.img, x_pixel + x, y_pixel + y, color);
 			x++;
@@ -124,26 +121,25 @@ void	draw_map(t_cub3d game)
 	int x_pixel;
 	int y_pixel;
 
-	game.map_info.y = 0;
-	game.map_info.x = 0;
+	game.info.y = 0;
+	game.info.x = 0;
 	y_pixel = 0;
-	x_pixel = 0;
-	while (game.pars.map[game.map_info.y])
+	while (game.pars.map[game.info.y])
 	{
-		game.map_info.x = 0;
+		game.info.x = 0;
 		x_pixel = 0;
-		while (game.pars.map[game.map_info.y][game.map_info.x])
+		while (game.pars.map[game.info.y][game.info.x])
 		{
-			if (game.pars.map[game.map_info.y][game.map_info.x] == '1')
+			if (game.pars.map[game.info.y][game.info.x] == '1')
 				put_square(game, x_pixel, y_pixel, WHITE);
-			else if (game.pars.map[game.map_info.y][game.map_info.x] == '0' ||
-				game.pars.map[game.map_info.y][game.map_info.x] == 'N' || game.pars.map[game.map_info.y][game.map_info.x] == 'S' ||
-				game.pars.map[game.map_info.y][game.map_info.x] == 'E' || game.pars.map[game.map_info.y][game.map_info.x] == 'W')
+			else if (game.pars.map[game.info.y][game.info.x] == '0' ||
+				game.pars.map[game.info.y][game.info.x] == 'N' || game.pars.map[game.info.y][game.info.x] == 'S' ||
+				game.pars.map[game.info.y][game.info.x] == 'E' || game.pars.map[game.info.y][game.info.x] == 'W')
 					put_square(game, x_pixel, y_pixel, BLACK);
-			x_pixel += game.map_info.tile_size;
-			game.map_info.x++;
+			x_pixel += game.info.tile_size;
+			game.info.x++;
 		}
-		y_pixel += game.map_info.tile_size;
-		game.map_info.y++;
+		y_pixel += game.info.tile_size;
+		game.info.y++;
 	}
 }
