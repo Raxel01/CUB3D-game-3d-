@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 02:55:14 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/12/03 12:04:23 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/12/05 20:32:18 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 #  define BUFFER_SIZE 9
 # endif
 
+#define HEIGHT 1080
+#define WIDTH 1920
 enum					e_path
 {
 	NORD,
