@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:06 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/05 20:12:57 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/05 21:06:40 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	init_struct(t_cub3d *game ,t_gamedata pars)
 	}
 	init_player(game);
 	init_rays(game);
+	init_floor_ciel(game);
 	if (init_textures(game))
 		return (1);
 	return (0);

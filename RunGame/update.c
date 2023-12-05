@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:29:09 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/05 20:25:49 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/05 20:57:42 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void draw_floor_cell(t_cub3d game)
 		i++;
 	}
 }
-
 
 void	draw_update(t_cub3d *game)
 {

@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:03:52 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/05 20:11:19 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/05 21:08:07 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	init_textures(t_cub3d *game)
 		game->texture[i].addr = mlx_get_data_addr(game->texture[i].img,\
 			&game->texture[i].bits_per_pixel, &game->texture[i].line_length,\
 				&game->texture[i].endian);
+		if (!game->texture[i].addr)
+			return (1);
 		tmp = tmp->next;
 		i++;
 	}
