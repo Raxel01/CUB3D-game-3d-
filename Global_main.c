@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Global_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 12:37:41 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/12/03 13:51:11 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/05 20:07:29 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ int	main(int ac, char **av)
 	initial_check(&fd, ac, av);
 	init_game(fd, &data);
 	parsing(av, &data);
-	run_game(data);
 	claimgamedata(&data);
 	return (0);
 }

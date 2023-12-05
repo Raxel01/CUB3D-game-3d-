@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 19:49:12 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/12/03 12:03:29 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/12/05 20:20:54 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	find_fill(t_gamedata *data, t_playerinfo *pos)
 				pos->countspace++;
 		}
 	}
-	pos->height = line + 1; 
+	pos->height = line + 1;
 }
 
 void	player_acces(t_gamedata *data, t_playerinfo *pos)

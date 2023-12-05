@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 19:29:51 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/28 15:43:08 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/12/05 20:19:50 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	east_link(t_gamedata *data, char *line)
 	while (line[j] && line[j] != ' ' && line[j] != '\t')
 		j++;
 	identifier = ft_strndup(line, j);
-	if (line[j] && line[j] == ' ' || line[j] == '\t')
+	if (line[j] && (line[j] == ' ' || line[j] == '\t'))
 		j++;
 	if (!cmp_textures(identifier, "EA"))
 	{

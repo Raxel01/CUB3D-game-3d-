@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extractextures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abait-ta <abait-ta@student.1337.ma >       +#+  +:+       +#+        */
+/*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 19:23:30 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/11/30 19:15:00 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/12/05 20:19:02 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	south_link(t_gamedata *data, char *line)
 	while (line[j] && line[j] != ' ' && line[j] != '\t')
 		j++;
 	identifier = ft_strndup(line, j);
-	if (line[j] && line[j] == ' ' || line[j] == '\t')
+	if (line[j] && (line[j] == ' ' || line[j] == '\t'))
 		j++;
 	if (!cmp_textures(identifier, "SO"))
 	{
@@ -46,7 +46,7 @@ void	nord_link(t_gamedata *data, char *line)
 	while (line[j] && line[j] != ' ' && line[j] != '\t')
 		j++;
 	identifier = ft_strndup(line, j);
-	if (line[j] && line[j] == ' ' || line[j] == '\t')
+	if (line[j] && (line[j] == ' ' || line[j] == '\t'))
 		j++;
 	if (!cmp_textures(identifier, "NO"))
 	{
@@ -87,7 +87,10 @@ void	recognize_textures(t_gamedata *data, char *line)
 		free(line);
 	}
 	else
+	{
+		write(2, "Error: GRAMMAR-> [ID][SPACE][PATH/[r,g,b]]\n\t", 44);
 		throwtextures(line, data);
+	}
 }
 
 int	validline(char *line)

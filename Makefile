@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+         #
+#    By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/11 03:18:17 by abait-ta          #+#    #+#              #
-#    Updated: 2023/12/03 14:15:48 by tben-dal         ###   ########.fr        #
+#    Updated: 2023/12/05 20:07:43 by abait-ta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,6 @@ PARS_M    = ./PARSING/MAPARSER
 PARS_COL  = ./PARSING/Importcolors
 PARS_TEXT = ./PARSING/Importtextures
 PARS_MEM  = ./PARSING/Memory_clean
-RUN_GAME  = ./RunGame
-
-RUN_GAME_SRC = $(RUN_GAME)/rungame.c $(RUN_GAME)/keys.c $(RUN_GAME)/start.c $(RUN_GAME)/start_utils.c \
-				$(RUN_GAME)/drawFunction.c $(RUN_GAME)/gets.c $(RUN_GAME)/update.c $(RUN_GAME)/moves_functions.c \
-				$(RUN_GAME)/check_utils.c $(RUN_GAME)/init_functions.c $(RUN_GAME)/turn_functions.c \
-				$(RUN_GAME)/cast_all_rays.c $(RUN_GAME)/wall_rendring.c
 
 SRC = Global_main.c $(PARSING_D)/display_errors.c $(PARSING_G)/g_tools.c $(PARSING_G)/g_usage.c \
 $(PARSING_G)/g_utils.c $(PARS_L)/get_next_line.c $(PARS_L)/get_next_line_utils.c $(PARS_TEXT)/textures_builder.c \
@@ -31,7 +25,7 @@ $(PARS_TEXT)/sequelextract.c $(PARS_MEM)/claimmemory.c $(PARS_M)/border_begin.c 
 $(PARS_M)/border_end.c $(PARS_M)/elemmap_analyser.c $(PARS_M)/map_extraction.c $(PARS_M)/validacces.c \
 $(PARS_M)/validacces_sequel.c $(RUN_GAME_SRC)
  
-HEADER = ./HEADER/Parsing.h ./HEADER/game.h
+HEADER = ./HEADER/Parsing.h
 
 CC = cc
 
@@ -61,10 +55,5 @@ re : fclean all
 
 norm :
 		norminette
-sound :
-	open ~/Downloads/Assassin\'s\ Creed\ Origins\ \(OST\)\ -\ Legions\ of\ Blood.mp3
 
-Egypt : clean sound 
-	clear && ./$(NAME) maps/egypt.cub
-	
 .PHONY: clean fclean all re NAME
