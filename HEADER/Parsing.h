@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 02:55:14 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/12/05 20:32:18 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/12/06 15:19:08 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@
 #  define BUFFER_SIZE 9
 # endif
 
-#define HEIGHT 1080
-#define WIDTH 1920
+# define HEIGHT 1080
+# define WIDTH 1920
+
 enum					e_path
 {
 	NORD,
@@ -103,6 +104,20 @@ typedef struct split
 	int					words;
 	int					len;
 }						t_split;
+
+/*
+	@- CHECK DUP DIRECTION
+*/
+typedef struct dir
+{
+	int	no;
+	int	so;
+	int	we;
+	int	ea;
+	int	f;
+	int	c;
+}					t_direction;
+
 /*
 	@- error phase :
 */
@@ -205,6 +220,14 @@ void					floorcolor(t_gamedata *data, char *line);
 void					west_link(t_gamedata *data, char *line);
 void					requiredcolor(t_gamedata *data);
 int						input_state(char *str);
+
+/*
+	@-Required elem checker [4 : textures | 2 : colors]
+*/
+void					requiredelem(t_gamedata *data);
+void					init_dir(t_direction *dir);
+int						only_elem(t_direction dir);
+void					elemnt_diff(t_gamedata *data, t_direction dir);
 
 /*
 	@-[Border Analyser]

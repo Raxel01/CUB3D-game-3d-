@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 19:49:12 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/12/05 20:20:54 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/12/06 14:59:36 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	find_fill(t_gamedata *data, t_playerinfo *pos)
 	pos->tall_line = ft_strlen(data->map[0]);
 	while (data->map[++line])
 	{
-		if (ft_strlen(data->map[line]) > pos->tall_line)
+		if (ft_strlen(data->map[line]) > (size_t)pos->tall_line)
 			pos->tall_line = ft_strlen(data->map[line]) + 1;
 		column = -1;
 		while (data->map[line][++column])
@@ -54,8 +54,6 @@ void	find_fill(t_gamedata *data, t_playerinfo *pos)
 
 void	player_acces(t_gamedata *data, t_playerinfo *pos)
 {
-	int	i;
-
 	find_fill(data, pos);
 	clone_mapgame(data, pos);
 	check_recursivly(data, pos, pos->player_y, pos->player_x);

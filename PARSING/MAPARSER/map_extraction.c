@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:53:47 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/12/03 11:50:52 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/12/06 14:58:42 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	mapstate(char *map, t_gamedata *data)
 {
-	int	elem;
-
 	if (map == NULL)
 	{
 		claimgamedata(data);

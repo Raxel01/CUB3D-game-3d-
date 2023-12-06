@@ -1,11 +1,10 @@
-C A 225,30,0
 NO Global_main.c
 
 SO Global_main.c
 
-WE Global_main.c
+  WE Global_main.c
   EA Global_main.c
-
+C 220,100,0
 F 220,100,0
 
 

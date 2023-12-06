@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 12:37:41 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/12/05 20:24:46 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/12/06 15:24:57 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,12 @@ void	extensionvalidity(char *filename)
 		extension_error();
 }
 
-void	parsing(char **av, t_gamedata *data)
+void	parsing(t_gamedata *data)
 {
 	importtextures(data);
 	required_textures(data);
 	requiredcolor(data);
+	requiredelem(data);
 	textureaccessiblity(data);
 	extractmap(data);
 	mapanalyser(data);
@@ -60,7 +61,7 @@ int	main(int ac, char **av)
 	fd = 0;
 	initial_check(&fd, ac, av);
 	init_game(fd, &data);
-	parsing(av, &data);
+	parsing(&data);
 	claimgamedata(&data);
 	return (0);
 }

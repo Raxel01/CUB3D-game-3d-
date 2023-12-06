@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 19:33:25 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/12/05 20:19:35 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/12/06 14:58:06 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ceilingcolor(t_gamedata *data, char *line)
 	while (line[index] && line[index] != ' ' && line[index] != '\t')
 		index++;
 	id = ft_strndup(line, index);
-	if (line[index] && line[index] == ' ' || line[index] == '\t')
+	if (line[index] && (line[index] == ' ' || line[index] == '\t'))
 		index++;
 	if (!cmp_textures(id, "C"))
 	{
@@ -79,7 +79,7 @@ void	floorcolor(t_gamedata *data, char *line)
 	while (line[index] && line[index] != ' ' && line[index] != '\t')
 		index++;
 	id = ft_strndup(line, index);
-	if (line[index] && line[index] == ' ' || line[index] == '\t')
+	if (line[index] && (line[index] == ' ' || line[index] == '\t'))
 		index++;
 	if (!cmp_textures(id, "F"))
 	{
