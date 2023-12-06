@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 20:41:50 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/05 18:29:23 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/06 18:57:26 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,23 +57,23 @@ void	draw_v_wall(t_cub3d *game, double distance_proj_plane, int rays_id)
 	y = game->dda.y1;
 	if (is_facing_right(game->rays.ray_angle))
 	{
-		game->texture->offset_x = fmod(game->rays.vyinter, game->info.tile_size) * (game->texture[2].width / game->info.tile_size);
-		while (y < game->dda.y2)
-		{
-			distance_from_top = y + ((wall_heightb / 2) - (game->height / 2));
-			game->texture->offset_y = (distance_from_top * (float)game->texture[2].height) / wall_heightb;
-			my_mlx_pixel_put(&game->img, rays_id, y, get_color(game->texture[2], game->texture->offset_x, game->texture->offset_y)); 
-			y++;
-		}
-	}
-	else
-	{
 		game->texture->offset_x = fmod(game->rays.vyinter, game->info.tile_size) * (game->texture[3].width / game->info.tile_size);
 		while (y < game->dda.y2)
 		{
 			distance_from_top = y + ((wall_heightb / 2) - (game->height / 2));
 			game->texture->offset_y = (distance_from_top * (float)game->texture[3].height) / wall_heightb;
-			my_mlx_pixel_put(&game->img, rays_id, y, get_color(game->texture[3], game->texture->offset_x, game->texture->offset_y));
+			my_mlx_pixel_put(&game->img, rays_id, y, get_color(game->texture[3], game->texture->offset_x, game->texture->offset_y)); 
+			y++;
+		}
+	}
+	else
+	{
+		game->texture->offset_x = (1 - fmod(game->rays.vyinter, game->info.tile_size) / game->info.tile_size) * game->texture[2].width;
+		while (y < game->dda.y2)
+		{
+			distance_from_top = y + ((wall_heightb / 2) - (game->height / 2));
+			game->texture->offset_y = (distance_from_top * (float)game->texture[2].height) / wall_heightb;
+			my_mlx_pixel_put(&game->img, rays_id, y, get_color(game->texture[2], game->texture->offset_x, game->texture->offset_y));
 			y++;
 		}
 	}
@@ -101,7 +101,7 @@ void	draw_h_wall(t_cub3d *game, double distance_proj_plane, int rays_id)
 	y = game->dda.y1;
 	if (is_facing_up(game->rays.ray_angle))
 	{
-		game->texture->offset_x = fmod(game->rays.hxinter, game->info.tile_size) * (game->texture[2].width / game->info.tile_size);
+		game->texture->offset_x = fmod(game->rays.hxinter, game->info.tile_size) * (game->texture[0].width / game->info.tile_size);
 		while (y < game->dda.y2)
 		{
 			distance_from_top = y + ((wall_heightb / 2) - (game->height / 2));
@@ -112,7 +112,7 @@ void	draw_h_wall(t_cub3d *game, double distance_proj_plane, int rays_id)
 	}
 	else
 	{
-		game->texture->offset_x = fmod(game->rays.hxinter, game->info.tile_size) * (game->texture[1].width / game->info.tile_size);
+		game->texture->offset_x = (1 - fmod(game->rays.hxinter, game->info.tile_size) / game->info.tile_size) * game->texture[2].width;
 		while (y < game->dda.y2)
 		{
 			distance_from_top = y + ((wall_heightb / 2) - (game->height / 2));

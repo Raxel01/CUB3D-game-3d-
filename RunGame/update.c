@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:29:09 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/05 20:57:42 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/06 09:37:01 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void draw_floor_cell(t_cub3d game)
 		while (j < game.width)
 		{
 			if (i < game.height / 2)
-				my_mlx_pixel_put(&game.img, j, i, SKYBLUE);
+				my_mlx_pixel_put(&game.img, j, i, game.info.ceil_color);
 			else
-				my_mlx_pixel_put(&game.img, j, i, DIMGRAY);
+				my_mlx_pixel_put(&game.img, j, i, game.info.floor_color);
 			j++;
 		}
 		i++;

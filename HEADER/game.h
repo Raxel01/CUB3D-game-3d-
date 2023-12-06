@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:37:53 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/05 21:07:08 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/06 14:23:20 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,7 @@ void	ft_maplen(t_cub3d *game);
 void	print_error(char *str);
 
 // update functions
-int	update(t_cub3d *game);
+int		update(t_cub3d *game);
 
 // cast rays functions
 void	cast_all_rays(t_cub3d *game);
