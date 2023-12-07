@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:37:53 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/07 10:52:59 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/07 12:05:02 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,12 +207,9 @@ void	get_v_i_ray(t_cub3d *game);
 void	get_h_i_ray(t_cub3d *game);
 
 // Wall functions
-void	dda_wall(t_cub3d game, int color);
 void	wall_rendring(t_cub3d *game);
 void	h_wall(t_cub3d *game, double distance_proj_plane, int rays_id);
 void	v_wall(t_cub3d *game, double distance_proj_plane, int rays_id);
-void	put_h_wall(t_cub3d *game, double wall_heightb, int rays_id);
-void	put_v_wall(t_cub3d *game, double wall_heightb, int rays_id);
 void	tex_render(t_cub3d *game, double wall_heightb, int rays_id, int side);
 
 // gets functions
