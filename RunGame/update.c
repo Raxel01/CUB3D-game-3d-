@@ -6,17 +6,17 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:29:09 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/06 09:37:01 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/07 10:49:02 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../HEADER/game.h"
 
-void draw_floor_cell(t_cub3d game)
+void	draw_floor_cell(t_cub3d game)
 {
-	int i;
-	int j;
-	
+	int	i;
+	int	j;
+
 	i = 0;
 	while (i < game.height)
 	{
@@ -38,8 +38,8 @@ void	draw_update(t_cub3d *game)
 	mlx_destroy_image(game->mlx_ptr, game->img.img);
 	mlx_clear_window(game->mlx_ptr, game->win_ptr);
 	game->img.img = mlx_new_image(game->mlx_ptr, game->width, game->height);
-	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bits_per_pixel,
-		&game->img.line_length, &game->img.endian);
+	game->img.addr = mlx_get_data_addr(game->img.img, \
+		&game->img.bits_per_pixel, &game->img.line_length, &game->img.endian);
 	draw_floor_cell(*game);
 	wall_rendring(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.img, 0, 0);

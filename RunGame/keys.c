@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:59:34 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/11/29 11:04:28 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/07 10:38:18 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	key_release(int keycode, t_cub3d *game)
 
 int	key_press(int keycode, t_cub3d *game)
 {
-	// printf("%d\n", keycode);
 	if (keycode == 13)
 		game->player.is_up = 1;
 	else if (keycode == 1)

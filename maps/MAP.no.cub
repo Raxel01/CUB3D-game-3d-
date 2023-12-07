@@ -1,10 +1,10 @@
 C 225,30,0
-NO Global_main.c
+NO TEXTURES/SO.xpm
 
-SO Global_main.c
+SO TEXTURES/NO.xpm
 
-WE Global_main.c
-  EA Global_main.c
+WE TEXTURES/WE.xpm
+EA TEXTURES/EA.xpm
 
 F 220,100,0
 

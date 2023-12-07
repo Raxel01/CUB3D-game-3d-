@@ -6,7 +6,7 @@
 #    By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/11 03:18:17 by abait-ta          #+#    #+#              #
-#    Updated: 2023/12/06 09:35:50 by tben-dal         ###   ########.fr        #
+#    Updated: 2023/12/07 10:28:36 by tben-dal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ RUN_GAME  = ./RunGame
 RUN_GAME_SRC = $(RUN_GAME)/rungame.c $(RUN_GAME)/keys.c $(RUN_GAME)/start.c $(RUN_GAME)/start_utils.c \
 				$(RUN_GAME)/drawFunction.c $(RUN_GAME)/gets.c $(RUN_GAME)/update.c $(RUN_GAME)/moves_functions.c \
 				$(RUN_GAME)/check_utils.c $(RUN_GAME)/init_functions.c $(RUN_GAME)/turn_functions.c \
-				$(RUN_GAME)/cast_all_rays.c $(RUN_GAME)/wall_rendring.c $(RUN_GAME)/textures.c
+				$(RUN_GAME)/cast_rays.c $(RUN_GAME)/wall_rendring.c $(RUN_GAME)/textures.c $(RUN_GAME)/h_and_v_wall.c
 
 SRC = Global_main.c $(PARSING_D)/display_errors.c $(PARSING_G)/g_tools.c $(PARSING_G)/g_usage.c \
 $(PARSING_G)/g_utils.c $(PARS_L)/get_next_line.c $(PARS_L)/get_next_line_utils.c $(PARS_TEXT)/textures_builder.c \

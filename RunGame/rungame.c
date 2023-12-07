@@ -6,13 +6,13 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:06 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/06 09:56:11 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/07 10:39:21 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../HEADER/game.h"
 
-int	init_struct(t_cub3d *game ,t_gamedata pars)
+int	init_struct(t_cub3d *game, t_gamedata pars)
 {
 	game->height = 720;
 	game->width = 1280;
@@ -25,7 +25,7 @@ int	init_struct(t_cub3d *game ,t_gamedata pars)
 		print_error("Error\nmlx_init failed\n");
 		return (1);
 	}
-	game->win_ptr = mlx_new_window(game->mlx_ptr,
+	game->win_ptr = mlx_new_window(game->mlx_ptr, \
 		game->width, game->height, "Cub3d");
 	if (!game->win_ptr)
 	{
@@ -43,7 +43,7 @@ int	init_struct(t_cub3d *game ,t_gamedata pars)
 void	run_game(t_gamedata pars)
 {
 	t_cub3d	game;
-	
+
 	if (init_struct(&game, pars))
 		return ;
 	start(&game);

@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 09:33:27 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/05 20:16:07 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/07 10:37:44 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	get_start_angle(t_cub3d *game, char player_direction)
 
 void	get_player_position(t_cub3d *game)
 {
-	int x;
-	int y;
-	
+	int	x;
+	int	y;
+
 	y = 0;
 	while (game->pars.map[y])
 	{
@@ -39,9 +39,9 @@ void	get_player_position(t_cub3d *game)
 				game->pars.map[y][x] == 'E' || game->pars.map[y][x] == 'W')
 			{
 				get_start_angle(game, game->pars.map[y][x]);
-				game->player.x = (x * game->info.tile_size)\
+				game->player.x = (x * game->info.tile_size) \
 					+ (game->info.tile_size / 2);
-				game->player.y = (y * game->info.tile_size)\
+				game->player.y = (y * game->info.tile_size) \
 					+ (game->info.tile_size / 2);
 				return ;
 			}

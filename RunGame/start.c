@@ -6,7 +6,7 @@
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:01:08 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/05 10:07:38 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/07 10:42:11 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	start(t_cub3d *game)
 {
 	game->img.img = mlx_new_image(game->mlx_ptr, game->width, game->height);
-	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bits_per_pixel,
-		&game->img.line_length, &game->img.endian);
+	game->img.addr = mlx_get_data_addr(game->img.img, \
+		&game->img.bits_per_pixel, &game->img.line_length, &game->img.endian);
 	ft_maplen(game);
 	get_player_position(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.img, 0, 0);
