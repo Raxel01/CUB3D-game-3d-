@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse_bonus.c                                      :+:      :+:    :+:   */
+/*   turn_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 11:27:35 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/12/07 16:47:18 by tben-dal         ###   ########.fr       */
+/*   Created: 2023/11/30 14:47:36 by tben-dal          #+#    #+#             */
+/*   Updated: 2023/12/06 23:28:26 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../HEADER/game.h"
 
-int	handle_mouse(int x, int y, t_cub3d *game)
+void	turn_right(t_cub3d *game)
 {
-	static int	old_x = WIDTH / 2;
+	game->player.rotation_angle += game->player.turn_speed;
+}
 
-	(void)y;
-	if (x < 0 || x > WIDTH)
-	{
-		mlx_mouse_move(game->win_ptr, WIDTH / 2, HEIGHT / 2);
-		return (0);
-	}
-	if (x > old_x)
-		turn_right(game);
-	if (x < old_x)
-		turn_left(game);
-	old_x = x;
-	return (0);
+void	turn_left(t_cub3d *game)
+{
+	game->player.rotation_angle -= game->player.turn_speed;
 }

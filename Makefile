@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+         #
+#    By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/11 03:18:17 by abait-ta          #+#    #+#              #
-#    Updated: 2023/12/07 13:53:45 by abait-ta         ###   ########.fr        #
+#    Updated: 2023/12/07 16:52:24 by tben-dal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,21 +18,27 @@ PARS_COL  = ./PARSING/Importcolors
 PARS_TEXT = ./PARSING/Importtextures
 PARS_MEM  = ./PARSING/Memory_clean
 BN = ./Bonus
+RUN_GAME  = ./RunGame
+
+RUN_GAME_SRC = $(RUN_GAME)/rungame.c $(RUN_GAME)/keys.c $(RUN_GAME)/start.c $(RUN_GAME)/start_utils.c \
+				$(RUN_GAME)/gets.c $(RUN_GAME)/update.c $(RUN_GAME)/moves_functions.c \
+				$(RUN_GAME)/check_utils.c $(RUN_GAME)/init_functions.c $(RUN_GAME)/turn_functions.c \
+				$(RUN_GAME)/cast_rays.c $(RUN_GAME)/wall_rendring.c $(RUN_GAME)/textures.c $(RUN_GAME)/h_and_v_wall.c
 
 SRC = Global_main.c $(PARSING_D)/display_errors.c $(PARSING_G)/g_tools.c $(PARSING_G)/g_usage.c \
 $(PARSING_G)/g_utils.c $(PARS_L)/get_next_line.c $(PARS_L)/get_next_line_utils.c $(PARS_TEXT)/textures_builder.c \
 $(PARSING_G)/g_epurline.c $(PARS_COL)/extractcolor.c $(PARS_COL)/rgbchecker.c $(PARS_TEXT)/extractextures.c \
 $(PARS_TEXT)/sequelextract.c $(PARS_MEM)/claimmemory.c $(PARS_M)/border_begin.c $(PARS_M)/border_analyser.c \
 $(PARS_M)/border_end.c $(PARS_M)/elemmap_analyser.c $(PARS_M)/map_extraction.c $(PARS_M)/validacces.c \
-$(PARS_M)/validacces_sequel.c $(PARS_TEXT)/onlyrequired.c $(RUN_GAME_SRC)
+$(PARS_M)/validacces_sequel.c $(PARS_TEXT)/onlyrequired.c $(BN)/mouse_bonus.c $(RUN_GAME_SRC)
 
 BNSRC = $(BN)/mouse_bonus.c
 
-HEADER = ./HEADER/Parsing.h
+HEADER = ./HEADER/Parsing.h ./HEADER/game.h
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -Ofast
 
 MLX_FLAGS = -framework OpenGL -framework AppKit
 
@@ -45,7 +51,7 @@ NAME = cub3D
 all : $(NAME)
 
 $(NAME): $(HEADER) $(OBJ)
-	$(CC) $(CFLAGS) $(MLX_FLAGS) -o  $@ $(OBJ)
+	$(CC) $(CFLAGS) $(MLX_FLAGS) ~/minilibx/libmlx.a -o $@ $(OBJ)
 
 %.o : %.c $(HEADER)
 	$(CC)  $(CFLAGS) -c $<  -o  $@ 

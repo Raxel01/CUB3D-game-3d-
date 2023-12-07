@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse_bonus.c                                      :+:      :+:    :+:   */
+/*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 11:27:35 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/12/07 16:47:18 by tben-dal         ###   ########.fr       */
+/*   Created: 2023/11/28 17:01:08 by tben-dal          #+#    #+#             */
+/*   Updated: 2023/12/07 10:42:11 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../HEADER/game.h"
 
-int	handle_mouse(int x, int y, t_cub3d *game)
+void	start(t_cub3d *game)
 {
-	static int	old_x = WIDTH / 2;
-
-	(void)y;
-	if (x < 0 || x > WIDTH)
-	{
-		mlx_mouse_move(game->win_ptr, WIDTH / 2, HEIGHT / 2);
-		return (0);
-	}
-	if (x > old_x)
-		turn_right(game);
-	if (x < old_x)
-		turn_left(game);
-	old_x = x;
-	return (0);
+	game->img.img = mlx_new_image(game->mlx_ptr, game->width, game->height);
+	game->img.addr = mlx_get_data_addr(game->img.img, \
+		&game->img.bits_per_pixel, &game->img.line_length, &game->img.endian);
+	ft_maplen(game);
+	get_player_position(game);
+	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.img, 0, 0);
 }

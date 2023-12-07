@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   Global_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 12:37:41 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/12/07 13:54:25 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/12/07 17:11:30 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./HEADER/Parsing.h"
+#include "./HEADER/game.h"
 
 void	extensionvalidity(char *filename)
 {
@@ -62,6 +63,7 @@ int	main(int ac, char **av)
 	initial_check(&fd, ac, av);
 	init_game(fd, &data);
 	parsing(&data);
+	run_game(data);
 	claimgamedata(&data);
 	return (0);
 }

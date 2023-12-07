@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse_bonus.c                                      :+:      :+:    :+:   */
+/*   check_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 11:27:35 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/12/07 16:47:18 by tben-dal         ###   ########.fr       */
+/*   Created: 2023/11/29 11:16:15 by tben-dal          #+#    #+#             */
+/*   Updated: 2023/12/07 10:31:53 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../HEADER/game.h"
 
-int	handle_mouse(int x, int y, t_cub3d *game)
+int	check_wall_collision(t_cub3d game)
 {
-	static int	old_x = WIDTH / 2;
+	int	x;
+	int	y;
 
-	(void)y;
-	if (x < 0 || x > WIDTH)
+	y = -2;
+	while (y < 2)
 	{
-		mlx_mouse_move(game->win_ptr, WIDTH / 2, HEIGHT / 2);
-		return (0);
+		x = -2;
+		while (x < 2)
+		{
+			if (game.pars.map[(int)((game.player.back_y + y) \
+				/ game.info.tile_size)][(int)((game.player.back_x + x) \
+				/ game.info.tile_size)] == '1')
+				return (0);
+			x++;
+		}
+		y++;
 	}
-	if (x > old_x)
-		turn_right(game);
-	if (x < old_x)
-		turn_left(game);
-	old_x = x;
-	return (0);
+	return (1);
 }

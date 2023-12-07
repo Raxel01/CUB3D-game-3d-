@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 02:55:14 by abait-ta          #+#    #+#             */
-/*   Updated: 2023/12/07 13:54:07 by abait-ta         ###   ########.fr       */
+/*   Updated: 2023/12/07 15:36:55 by tben-dal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 #  define BUFFER_SIZE 9
 # endif
 
-# define HEIGHT 1080
-# define WIDTH 1920
+# define HEIGHT 720
+# define WIDTH 1280
 
 enum					e_path
 {
