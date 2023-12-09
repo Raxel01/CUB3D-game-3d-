@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rungame.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tben-dal <tben-dal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:06 by tben-dal          #+#    #+#             */
-/*   Updated: 2023/12/07 15:17:52 by tben-dal         ###   ########.fr       */
+/*   Updated: 2023/12/08 15:40:41 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,24 @@ int	init_struct(t_cub3d *game, t_gamedata pars)
 	init_floor_ciel(game);
 	if (init_textures(game))
 		return (1);
+	return (0);
+}
+
+int	handle_mouse(int x, int y, t_cub3d *game)
+{
+	static int	old_x = WIDTH / 2;
+
+	(void)y;
+	if (x < 0 || x > WIDTH)
+	{
+		mlx_mouse_move(game->win_ptr, WIDTH / 2, HEIGHT / 2);
+		return (0);
+	}
+	if (x > old_x)
+		turn_right(game);
+	if (x < old_x)
+		turn_left(game);
+	old_x = x;
 	return (0);
 }
 
